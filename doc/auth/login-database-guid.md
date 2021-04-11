@@ -8,6 +8,9 @@ account -> authentication -> session
 
 ## account
 
+permitted activities:
+`get | update | create | cancel`
+
 ```javascript
 {
   "name": "Leanne Graham",
@@ -20,6 +23,7 @@ account -> authentication -> session
     "city": "Gwenborough",
     "zipcode": "92998-3874"
   },
+  "created-at": "2013-01-01 12:00:00Z",
   "active": true, // only approved status
   "status": "approved" // "waiting for approval" | "approved" | "reproved" | "blocked"
 }
@@ -27,18 +31,27 @@ account -> authentication -> session
 
 ## authentication
 
+permitted activities:
+`get | update | create | cancel`
+
 ```javascript
 {
   "account_id": "account_id",
   "password": "hashpassword",
   "attempts": 0,
   "session_limit": 3,
-  "status": "active", //"active" | "blocked" | "created"
-  "auth-group": ["auth-group-id"]
+  "status": "offline", //"online" | "offline" | "blocked" | "created"
+  "active": true,
+  "auth-group": ["auth-group-id"],
+  "created-at": "2013-01-01 12:00:00Z",
+  "updated-at": "2013-01-01 12:00:00Z"
 }
 ```
 
 ## auth-group
+
+permitted activities:
+`get | update | create | delete`
 
 ```javascript
 {
@@ -56,17 +69,24 @@ account -> authentication -> session
 
 ## session
 
+permitted activities:
+`get | create | drop`
+
 ```javascript
 {
   "authentication-id": 1,
   "created-at": "2021-01-01 12:00:00Z",
   "due-date": "2021-01-02 12:00:00Z",
   "device": "unknown",
+  "active": true,
   "ip": "192.168.0.1"
 }
 ```
 
 ## activity-history
+
+permitted activities:
+`get | create`
 
 ```javascript
 {
