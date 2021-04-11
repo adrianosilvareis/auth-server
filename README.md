@@ -2,10 +2,11 @@
 
 ## TODO
 
-| feature                                         | progress |
-| ----------------------------------------------- | -------- |
-| [login-fail](doc/auth/login-fail-flow.md)       | 0%       |
-| [login-success](doc/auth/login-success-flow.md) | 0%       |
+| feature                                           | progress |
+| ------------------------------------------------- | -------- |
+| [login-fail](doc/auth/login-fail-flow.md)         | 0%       |
+| [login-success](doc/auth/login-success-flow.md)   | 0%       |
+| [login-database](doc/auth/login-database-guid.md) | 0%       |
 
 ## Architecture
 
