@@ -10,11 +10,11 @@ export interface Session {
 
 export type SessionProperties = Omit<Session, 'id'>
 
-export interface GetSessions {
-  getList(): Promise<Session[]>
+export interface SessionList {
+  listActiveSessions(): Promise<Session[]>
 }
 
-export interface GetSession {
+export interface GetSessionByUser {
   getByUserId(userId: string): Promise<Session>
 }
 
