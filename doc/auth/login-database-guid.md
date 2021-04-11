@@ -4,11 +4,11 @@
 account -> authentication -> session
 ```
 
-## json sample
+## javascript sample
 
 ## account
 
-```json
+```javascript
 {
   "name": "Leanne Graham",
   "username": "Bret",
@@ -27,7 +27,7 @@ account -> authentication -> session
 
 ## authentication
 
-```json
+```javascript
 {
   "account_id": "account_id",
   "password": "hashpassword",
@@ -40,7 +40,7 @@ account -> authentication -> session
 
 ## auth-group
 
-```json
+```javascript
 {
   "title": "administrator",
   "activities": [
@@ -56,7 +56,7 @@ account -> authentication -> session
 
 ## session
 
-```json
+```javascript
 {
   "authentication-id": 1,
   "created-at": "2021-01-01 12:00:00Z",
@@ -68,7 +68,7 @@ account -> authentication -> session
 
 ## activity-history
 
-```json
+```javascript
 {
   "session-id": 1,
   "activity": "get_accounts", //get_accounts | create_account | update_account | delete_account | cancel_account
