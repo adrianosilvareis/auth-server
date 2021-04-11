@@ -1,6 +1,8 @@
 # Auth - Login Fail system
 
-- [ ] when trying to log in with the wrong password, record the first and second attempt 
+[HOME](../../README.md)
+
+- [ ] when trying to log in with the wrong password, record the first and second attempt
 - [ ] after the second wrong attempt, create a 1 min counter before releasing the next attempt
 - [ ] after the third wrong attempt, block the account for 24 hours, not allowing further attempts in this period
 - [ ] locked accounts should not log in even with the correct password
