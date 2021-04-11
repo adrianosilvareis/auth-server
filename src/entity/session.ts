@@ -2,7 +2,7 @@ export interface Session {
   id: string
   authenticationId: string
   ip: string
-  device: string
+  userAgent: string
   createdAt: Date
   dueDate: Date
   active: boolean
