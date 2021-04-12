@@ -1,12 +1,9 @@
-import { Authentication, AuthenticationByAccount, StatusType } from '@/entity/authentication'
-import { Session } from '@/entity/session'
-import faker from 'faker'
 import { AuthenticationByAccountRepository } from '@/use-case/session/protocols/authentication-repository'
 import { SessionListByAuthenticationRepository } from '@/use-case/session/protocols/session-repository'
 import { DbSessionByAccount } from '@/use-case/session/session-by-account/db-session-by-account'
+import { makeAuthenticationByAccountStub, mockedAuthentication } from '../stubs/authentications'
+import { makeSessionListByAccountRepositoryStub, mockedReturnGetSessionListRepository } from '../stubs/sessions'
 
-const mockedAuthentication = mockAuthentication()
-const mockedReturnGetSessionListRepository = mockReturnGetSessionListRepository()
 describe('SessionByAccount', () => {
   it('should call get authentication with account_id', async () => {
     const functionName = 'getByAccountId'
@@ -77,56 +74,4 @@ function makeSut (): SutTypes {
     authenticationByAccountStub,
     sessionListByAuthenticationStub
   }
-}
-function makeSessionListByAccountRepositoryStub ():SessionListByAuthenticationRepository {
-  class SessionByAccountRepositoryStub implements SessionListByAuthenticationRepository {
-    async getSessionsByAuthenticationId (accountId: string): Promise<Session[]> {
-      return mockedReturnGetSessionListRepository
-    }
-  }
-  return new SessionByAccountRepositoryStub()
-}
-
-function makeAuthenticationByAccountStub (): AuthenticationByAccount {
-  class AuthenticationByAccountStub implements AuthenticationByAccountRepository {
-    async getByAccountId (accountId: string): Promise<Authentication> {
-      return mockedAuthentication
-    }
-  }
-  return new AuthenticationByAccountStub()
-}
-
-function mockAuthentication (): Authentication {
-  const authGroup = []
-  for (let index = 0; index < 3; index++) {
-    authGroup.push(faker.datatype.uuid())
-  }
-  return {
-    id: faker.datatype.uuid(),
-    accountId: faker.datatype.uuid(),
-    password: faker.internet.password(8),
-    attempts: faker.datatype.number(2),
-    sessionLimit: faker.datatype.number(3),
-    status: StatusType.Offline,
-    active: true,
-    authGroup,
-    createdAt: faker.date.past(),
-    updatedAt: faker.date.recent()
-  }
-}
-
-function mockReturnGetSessionListRepository (): Session[] {
-  const sessions: Session[] = []
-  for (let row = 12; row >= 0; row--) {
-    sessions.push({
-      id: faker.datatype.uuid(),
-      ip: faker.internet.ip(),
-      authenticationId: faker.datatype.uuid(),
-      createdAt: faker.date.recent(),
-      active: true,
-      userAgent: faker.internet.userAgent(),
-      dueDate: faker.date.future()
-    })
-  }
-  return sessions
 }

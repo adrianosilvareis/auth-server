@@ -1,9 +1,8 @@
 import { Session } from '@/entity/session'
 import { SessionListRepository } from '@/use-case/session/protocols/session-repository'
 import { DbSessionList } from '@/use-case/session/session-list/db-session-list'
-import faker from 'faker'
+import { mockedReturnGetSessionListRepository } from '../stubs/sessions'
 
-const mockReturnGetSessionList = mockReturnGetSessionListRepository()
 describe('DbSessionList', () => {
   it('should call getSessionListRepository with correct params', async () => {
     const functionName = 'getSessionList'
@@ -24,7 +23,7 @@ describe('DbSessionList', () => {
     await expect(promise).rejects.toThrowError(expectedThrow)
   })
   it('should return all active sessions', async () => {
-    const expectedReturn = mockReturnGetSessionList
+    const expectedReturn = mockedReturnGetSessionListRepository
 
     const { sut } = makeSut()
     const response = await sut.listActiveSessions()
@@ -50,24 +49,8 @@ function makeSut (): SutTypes {
 function makeSessionRepositoryStub (): SessionListRepository {
   class SessionRepositoryStub implements SessionListRepository {
     async getSessionList (options?: Partial<Session>): Promise<Session[]> {
-      return mockReturnGetSessionList
+      return mockedReturnGetSessionListRepository
     }
   }
   return new SessionRepositoryStub()
-}
-
-function mockReturnGetSessionListRepository (): Session[] {
-  const sessions: Session[] = []
-  for (let row = 12; row >= 0; row--) {
-    sessions.push({
-      id: faker.datatype.uuid(),
-      ip: faker.internet.ip(),
-      authenticationId: faker.datatype.uuid(),
-      createdAt: faker.date.recent(),
-      active: true,
-      userAgent: faker.internet.userAgent(),
-      dueDate: faker.date.future()
-    })
-  }
-  return sessions
 }
