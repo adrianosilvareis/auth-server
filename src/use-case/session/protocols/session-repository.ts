@@ -5,6 +5,6 @@ export interface SessionListRepository {
   getSessionList(options?: SessionFilters): Promise<Session[]>
 }
 
-export interface SessionListByAccountRepository {
-  getSessionsByAccountId(accountId: string):Promise<Session[]>
+export interface SessionListByAuthenticationRepository {
+  getSessionsByAuthenticationId(authenticationId: string):Promise<Session[]>
 }

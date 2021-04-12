@@ -2,8 +2,8 @@ import { Authentication, AuthenticationByAccount, StatusType } from '@/entity/au
 import { Session } from '@/entity/session'
 import faker from 'faker'
 import { AuthenticationByAccountRepository } from '../protocols/authentication-repository'
-import { SessionListByAccountRepository } from '../protocols/session-repository'
-import { DbSessionByAccount } from './db-session-by-account'
+import { SessionListByAuthenticationRepository } from '../protocols/session-repository'
+import { DbSessionByAccount } from './db-session-by-authentication'
 
 const mockedAuthentication = mockAuthentication()
 describe('SessionByAccount', () => {
@@ -34,9 +34,9 @@ describe('SessionByAccount', () => {
     await expect(promise).rejects.toThrowError(expectedThrow)
   })
   it('should call get sessions active with authentication_id', async () => {
-    const functionName = 'getSessionsByAccountId'
+    const functionName = 'getSessionsByAuthenticationId'
     const data = 'any_account_id'
-    const expectedCalled = mockedAuthentication.accountId
+    const expectedCalled = mockedAuthentication.id
     const { sut, sessionListByAccountStub } = makeSut()
     const spy = jest.spyOn(sessionListByAccountStub, functionName)
     await sut.getByAccountId(data)
@@ -49,7 +49,7 @@ describe('SessionByAccount', () => {
 type SutTypes = {
   sut: DbSessionByAccount,
   authenticationByAccountStub: AuthenticationByAccountRepository,
-  sessionListByAccountStub: SessionListByAccountRepository
+  sessionListByAccountStub: SessionListByAuthenticationRepository
 }
 
 function makeSut (): SutTypes {
@@ -63,9 +63,9 @@ function makeSut (): SutTypes {
     sessionListByAccountStub
   }
 }
-function makeSessionListByAccountRepositoryStub ():SessionListByAccountRepository {
-  class SessionByAccountRepositoryStub implements SessionListByAccountRepository {
-    getSessionsByAccountId (accountId: string): Promise<Session[]> {
+function makeSessionListByAccountRepositoryStub ():SessionListByAuthenticationRepository {
+  class SessionByAccountRepositoryStub implements SessionListByAuthenticationRepository {
+    getSessionsByAuthenticationId (accountId: string): Promise<Session[]> {
       return null
     }
   }
