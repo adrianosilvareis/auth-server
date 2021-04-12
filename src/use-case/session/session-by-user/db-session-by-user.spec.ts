@@ -12,7 +12,15 @@ describe('SessionByUser', () => {
     await sut.getByUserId(expectedCalled)
     expect(spy).toHaveBeenCalledWith(expectedCalled)
   })
-  it.todo('should throw if getAuthenticationByUser throws')
+  it('should throw if getAuthenticationByUser throws', async () => {
+    const functionName = 'getByUserId'
+    const expectedThrow = new Error('any_get_authentication_by_user')
+    const data = 'any_user_id'
+    const { sut, authenticationByUserStub } = makeSut()
+    jest.spyOn(authenticationByUserStub, functionName).mockReturnValueOnce(Promise.reject(expectedThrow))
+    const promise = sut.getByUserId(data)
+    await expect(promise).rejects.toThrowError(expectedThrow)
+  })
   it.todo('should call get sessions active with authentication_id')
   it.todo('should throw if getSessionByAuthentication throws')
   it.todo('should return all sessions that belong to him')
