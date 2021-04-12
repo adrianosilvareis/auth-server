@@ -1,10 +1,17 @@
 import { Authentication, AuthenticationByUser, StatusType } from '@/entity/authentication'
-import faker, { datatype } from 'faker'
+import faker from 'faker'
 import { DbSessionByUser } from './db-session-by-user'
 
 const mockedAuthentication = mockAuthentication()
 describe('SessionByUser', () => {
-  it.todo('should call get authentication with user_id')
+  it('should call get authentication with user_id', async () => {
+    const functionName = 'getByUserId'
+    const expectedCalled = 'any_user_id'
+    const { sut, authenticationByUserStub } = makeSut()
+    const spy = jest.spyOn(authenticationByUserStub, functionName)
+    await sut.getByUserId(expectedCalled)
+    expect(spy).toHaveBeenCalledWith(expectedCalled)
+  })
   it.todo('should throw if getAuthenticationByUser throws')
   it.todo('should call get sessions active with authentication_id')
   it.todo('should throw if getSessionByAuthentication throws')
