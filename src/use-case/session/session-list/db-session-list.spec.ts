@@ -1,5 +1,5 @@
 import { Session } from '@/entity/session'
-import { SessionRepository } from '../protocols/session-repository'
+import { SessionListRepository } from '../protocols/session-repository'
 import { DbSessionList } from './db-session-list'
 import faker from 'faker'
 
@@ -34,7 +34,7 @@ describe('DbSessionList', () => {
 
 type SutTypes = {
   sut: DbSessionList,
-  sessionRepositoryStub: SessionRepository
+  sessionRepositoryStub: SessionListRepository
 }
 
 function makeSut (): SutTypes {
@@ -47,8 +47,8 @@ function makeSut (): SutTypes {
   }
 }
 
-function makeSessionRepositoryStub (): SessionRepository {
-  class SessionRepositoryStub implements SessionRepository {
+function makeSessionRepositoryStub (): SessionListRepository {
+  class SessionRepositoryStub implements SessionListRepository {
     async getSessionList (options?: Partial<Session>): Promise<Session[]> {
       return mockReturnGetSessionList
     }

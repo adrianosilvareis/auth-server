@@ -14,8 +14,8 @@ export interface SessionList {
   listActiveSessions(): Promise<Session[]>
 }
 
-export interface SessionByUser {
-  getByUserId(userId: string): Promise<Session>
+export interface SessionByAccount {
+  getByAccountId(accountId: string): Promise<Session>
 }
 
 export interface CreateSession {

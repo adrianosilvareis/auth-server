@@ -1,8 +1,8 @@
 import { Session, SessionList } from '@/entity/session'
-import { SessionFilters, SessionRepository } from '../protocols/session-repository'
+import { SessionFilters, SessionListRepository } from '../protocols/session-repository'
 
 export class DbSessionList implements SessionList {
-  constructor (private readonly sessionRepository: SessionRepository) {}
+  constructor (private readonly sessionRepository: SessionListRepository) {}
 
   async listActiveSessions (): Promise<Session[]> {
     const sessionFilters = <SessionFilters> {

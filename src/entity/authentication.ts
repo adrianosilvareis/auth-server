@@ -24,8 +24,8 @@ export interface AuthenticationList {
   getList(): Promise<Authentication[]>
 }
 
-export interface AuthenticationByUser {
-  getByUserId (userId: string): Promise<Authentication>
+export interface AuthenticationByAccount {
+  getByAccountId (accountId: string): Promise<Authentication>
 }
 
 export interface UpdateAuthentication {
