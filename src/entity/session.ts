@@ -15,7 +15,7 @@ export interface SessionList {
 }
 
 export interface SessionByAccount {
-  getByAccountId(accountId: string): Promise<Session>
+  getByAccountId(accountId: string): Promise<Session[]>
 }
 
 export interface CreateSession {

@@ -8,10 +8,10 @@ export class DbSessionByAccount implements SessionByAccount {
     private readonly session: SessionListByAuthenticationRepository
   ) {}
 
-  async getByAccountId (accountId: string): Promise<Session> {
+  async getByAccountId (accountId: string): Promise<Session[]> {
     const authentication = await this.authentication.getByAccountId(accountId)
     if (!authentication) throw new Error('account not found')
-    await this.session.getSessionsByAuthenticationId(authentication.id)
-    return null
+    const sessions = await this.session.getSessionsByAuthenticationId(authentication.id)
+    return sessions
   }
 }

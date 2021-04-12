@@ -6,6 +6,7 @@ import { SessionListByAuthenticationRepository } from '../protocols/session-repo
 import { DbSessionByAccount } from './db-session-by-authentication'
 
 const mockedAuthentication = mockAuthentication()
+const mockedReturnGetSessionListRepository = mockReturnGetSessionListRepository()
 describe('SessionByAccount', () => {
   it('should call get authentication with account_id', async () => {
     const functionName = 'getByAccountId'
@@ -51,7 +52,13 @@ describe('SessionByAccount', () => {
     const promise = sut.getByAccountId(data)
     await expect(promise).rejects.toThrowError(expectedThrow)
   })
-  it.todo('should return all sessions that belong to him')
+  it('should return all sessions that belong to him', async () => {
+    const data = 'any_account_id'
+    const expectedReturn = mockedReturnGetSessionListRepository
+    const { sut } = makeSut()
+    const response = await sut.getByAccountId(data)
+    expect(response).toEqual(expectedReturn)
+  })
 })
 
 type SutTypes = {
@@ -73,8 +80,8 @@ function makeSut (): SutTypes {
 }
 function makeSessionListByAccountRepositoryStub ():SessionListByAuthenticationRepository {
   class SessionByAccountRepositoryStub implements SessionListByAuthenticationRepository {
-    getSessionsByAuthenticationId (accountId: string): Promise<Session[]> {
-      return null
+    async getSessionsByAuthenticationId (accountId: string): Promise<Session[]> {
+      return mockedReturnGetSessionListRepository
     }
   }
   return new SessionByAccountRepositoryStub()
@@ -106,4 +113,20 @@ function mockAuthentication (): Authentication {
     createdAt: faker.date.past(),
     updatedAt: faker.date.recent()
   }
+}
+
+function mockReturnGetSessionListRepository (): Session[] {
+  const sessions: Session[] = []
+  for (let row = 12; row >= 0; row--) {
+    sessions.push({
+      id: faker.datatype.uuid(),
+      ip: faker.internet.ip(),
+      authenticationId: faker.datatype.uuid(),
+      createdAt: faker.date.recent(),
+      active: true,
+      userAgent: faker.internet.userAgent(),
+      dueDate: faker.date.future()
+    })
+  }
+  return sessions
 }
