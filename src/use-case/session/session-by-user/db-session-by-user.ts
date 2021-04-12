@@ -6,7 +6,7 @@ export class DbSessionByUser implements SessionByUser {
 
   async getByUserId (userId: string): Promise<Session> {
     const authentication = await this.authentication.getByUserId(userId)
-
+    if (!authentication) throw new Error('user not found')
     return null
   }
 }
