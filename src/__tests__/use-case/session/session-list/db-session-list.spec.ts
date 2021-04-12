@@ -1,6 +1,6 @@
 import { Session } from '@/entity/session'
-import { SessionListRepository } from '../protocols/session-repository'
-import { DbSessionList } from './db-session-list'
+import { SessionListRepository } from '@/use-case/session/protocols/session-repository'
+import { DbSessionList } from '@/use-case/session/session-list/db-session-list'
 import faker from 'faker'
 
 const mockReturnGetSessionList = mockReturnGetSessionListRepository()

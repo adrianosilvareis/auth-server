@@ -1,9 +1,9 @@
 import { Authentication, AuthenticationByAccount, StatusType } from '@/entity/authentication'
 import { Session } from '@/entity/session'
 import faker from 'faker'
-import { AuthenticationByAccountRepository } from '../protocols/authentication-repository'
-import { SessionListByAuthenticationRepository } from '../protocols/session-repository'
-import { DbSessionByAccount } from './db-session-by-authentication'
+import { AuthenticationByAccountRepository } from '@/use-case/session/protocols/authentication-repository'
+import { SessionListByAuthenticationRepository } from '@/use-case/session/protocols/session-repository'
+import { DbSessionByAccount } from '@/use-case/session/session-by-account/db-session-by-account'
 
 const mockedAuthentication = mockAuthentication()
 const mockedReturnGetSessionListRepository = mockReturnGetSessionListRepository()
