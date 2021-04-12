@@ -37,30 +37,38 @@ describe('SessionByAccount', () => {
     const functionName = 'getSessionsByAuthenticationId'
     const data = 'any_account_id'
     const expectedCalled = mockedAuthentication.id
-    const { sut, sessionListByAccountStub } = makeSut()
-    const spy = jest.spyOn(sessionListByAccountStub, functionName)
+    const { sut, sessionListByAuthenticationStub } = makeSut()
+    const spy = jest.spyOn(sessionListByAuthenticationStub, functionName)
     await sut.getByAccountId(data)
     expect(spy).toHaveBeenCalledWith(expectedCalled)
   })
-  it.todo('should throw if getSessionByAuthentication throws')
+  it('should throw if getSessionsByAuthenticationId throws', async () => {
+    const functionName = 'getSessionsByAuthenticationId'
+    const expectedThrow = new Error('any_get_authentication_by_account')
+    const data = 'any_account_id'
+    const { sut, sessionListByAuthenticationStub } = makeSut()
+    jest.spyOn(sessionListByAuthenticationStub, functionName).mockReturnValueOnce(Promise.reject(expectedThrow))
+    const promise = sut.getByAccountId(data)
+    await expect(promise).rejects.toThrowError(expectedThrow)
+  })
   it.todo('should return all sessions that belong to him')
 })
 
 type SutTypes = {
   sut: DbSessionByAccount,
   authenticationByAccountStub: AuthenticationByAccountRepository,
-  sessionListByAccountStub: SessionListByAuthenticationRepository
+  sessionListByAuthenticationStub: SessionListByAuthenticationRepository
 }
 
 function makeSut (): SutTypes {
   const authenticationByAccountStub = makeAuthenticationByAccountStub()
-  const sessionListByAccountStub = makeSessionListByAccountRepositoryStub()
-  const sut = new DbSessionByAccount(authenticationByAccountStub, sessionListByAccountStub)
+  const sessionListByAuthenticationStub = makeSessionListByAccountRepositoryStub()
+  const sut = new DbSessionByAccount(authenticationByAccountStub, sessionListByAuthenticationStub)
 
   return {
     sut,
     authenticationByAccountStub,
-    sessionListByAccountStub
+    sessionListByAuthenticationStub
   }
 }
 function makeSessionListByAccountRepositoryStub ():SessionListByAuthenticationRepository {
@@ -73,12 +81,12 @@ function makeSessionListByAccountRepositoryStub ():SessionListByAuthenticationRe
 }
 
 function makeAuthenticationByAccountStub (): AuthenticationByAccount {
-  class authenticationByAccountStub implements AuthenticationByAccountRepository {
+  class AuthenticationByAccountStub implements AuthenticationByAccountRepository {
     async getByAccountId (accountId: string): Promise<Authentication> {
       return mockedAuthentication
     }
   }
-  return new authenticationByAccountStub()
+  return new AuthenticationByAccountStub()
 }
 
 function mockAuthentication (): Authentication {
