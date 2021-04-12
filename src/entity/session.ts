@@ -14,7 +14,7 @@ export interface SessionList {
   listActiveSessions(): Promise<Session[]>
 }
 
-export interface GetSessionByUser {
+export interface SessionByUser {
   getByUserId(userId: string): Promise<Session>
 }
 
