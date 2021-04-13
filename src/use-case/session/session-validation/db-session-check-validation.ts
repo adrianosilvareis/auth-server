@@ -15,6 +15,9 @@ export class DbSessionCheckValidation implements SessionCheckValidation {
     if (session.dueDate <= currentDate) {
       return true
     }
-    return null
+    if (session.userAgent !== userAgent) {
+      return true
+    }
+    return true
   }
 }

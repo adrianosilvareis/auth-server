@@ -44,8 +44,16 @@ describe('DbSessionCheckValidation', () => {
     const response = await sut.check('any_session_id', 'any_agent_user')
     expect(response).toBeTruthy()
   })
-  it.todo('should return true if the user agent is not the same as the session agent')
-  it.todo('should return false if it passes all checks')
+  it('should return true if the user agent is not the same as the session agent', async () => {
+    const { sut } = makeSut()
+    const response = await sut.check('any_session_id', 'any_agent_user')
+    expect(response).toBeTruthy()
+  })
+  it('should return false if it passes all checks', async () => {
+    const { sut } = makeSut()
+    const response = await sut.check('any_session_id', mockedSession.userAgent)
+    expect(response).toBeTruthy()
+  })
 })
 
 type SutTypes = {
@@ -64,7 +72,7 @@ function makeSut (): SutTypes {
 function makeSessionByIdStub (): SessionById {
   class SessionByIdStub implements SessionById {
     async getById (sessionId: string): Promise<Session> {
-      return null
+      return mockedSession
     }
   }
   return new SessionByIdStub()
