@@ -13,7 +13,7 @@ export class DbSessionLimitCheckByAccount implements SessionLimitCheckByAccount 
     if (!authentication) throw new Error('account not found')
     const activeSessionCount = await this.sessionCount.count(authentication.id)
     if (activeSessionCount > authentication.sessionLimit) {
-      throw new Error('session limit exceeded for this account')
+      return true
     }
     return false
   }

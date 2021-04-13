@@ -48,14 +48,21 @@ describe('DbSessionLimitCheckByAccount', () => {
     const promise = sut.check(data)
     await expect(promise).rejects.toThrowError(expectedThrow)
   })
-  it('should throw if session count greater than limit of account', async () => {
+  it('should return truthy if session count greater than limit of account', async () => {
     const data = 'any_account_id'
     const functionName = 'count'
-    const expectedThrow = new Error('session limit exceeded for this account')
     const { sut, sessionCountByAuthenticationStub } = makeSut()
     jest.spyOn(sessionCountByAuthenticationStub, functionName).mockReturnValueOnce(Promise.resolve(mockedAuthentication.sessionLimit + 1))
-    const promise = sut.check(data)
-    await expect(promise).rejects.toThrowError(expectedThrow)
+    const response = await sut.check(data)
+    expect(response).toBeTruthy()
+  })
+  it('should return falsy if session count less than or equal to', async () => {
+    const data = 'any_account_id'
+    const functionName = 'count'
+    const { sut, sessionCountByAuthenticationStub } = makeSut()
+    jest.spyOn(sessionCountByAuthenticationStub, functionName).mockReturnValueOnce(Promise.resolve(mockedAuthentication.sessionLimit))
+    const response = await sut.check(data)
+    expect(response).toBeFalsy()
   })
 })
 
