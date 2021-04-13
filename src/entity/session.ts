@@ -18,6 +18,10 @@ export interface SessionByAccount {
   getByAccountId(accountId: string): Promise<Session[]>
 }
 
+export interface SessionById {
+  getById(sessionId: string): Promise<Session>
+}
+
 export interface CreateSession {
   create(property: SessionProperties): Promise<Session>
 }
