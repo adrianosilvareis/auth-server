@@ -1,5 +1,6 @@
 import { Session, SessionById } from '@/entity/session'
 import { DbSessionCheckValidation } from '@/use-case/session/session-validation/db-session-check-validation'
+import faker from 'faker'
 import { mockedSession } from '../stubs/sessions'
 
 describe('DbSessionCheckValidation', () => {
@@ -28,14 +29,21 @@ describe('DbSessionCheckValidation', () => {
   })
   it('should return true if session is inactive', async () => {
     const functionName = 'getById'
-    const expectedResponses = mockedSession
-    expectedResponses.active = false
+    const expectedResponses = Object.assign({}, mockedSession, { active: false })
     const { sut, sessionByIdSut } = makeSut()
     jest.spyOn(sessionByIdSut, functionName).mockReturnValueOnce(Promise.resolve(expectedResponses))
     const response = await sut.check('any_session_id', 'any_agent_user')
     expect(response).toBeTruthy()
   })
-  it.todo('should return true if due date is greater than or equal to current date')
+  it('should return true if due date is greater than or equal to current date', async () => {
+    const functionName = 'getById'
+    const pastDate = faker.date.past()
+    const expectedResponses = Object.assign({}, mockedSession, { dueDate: pastDate })
+    const { sut, sessionByIdSut } = makeSut()
+    jest.spyOn(sessionByIdSut, functionName).mockReturnValueOnce(Promise.resolve(expectedResponses))
+    const response = await sut.check('any_session_id', 'any_agent_user')
+    expect(response).toBeTruthy()
+  })
   it.todo('should return true if the user agent is not the same as the session agent')
   it.todo('should return false if it passes all checks')
 })

@@ -11,6 +11,10 @@ export class DbSessionCheckValidation implements SessionCheckValidation {
     if (!session.active) {
       return true
     }
+    const currentDate = new Date()
+    if (session.dueDate <= currentDate) {
+      return true
+    }
     return null
   }
 }
