@@ -3,7 +3,7 @@
 [HOME](../../README.md)
 
 - [ ] check if the account has reached the limit of simultaneous sessions
-- [ ] drop open session from the same account (when you reach the limit)
+- [x] drop open session from the same account (when you reach the limit)
 - [x] a list of sessions from the same account will be provided when the open session limit is reached
 - [ ] the maximum number of sessions must be configured in the system
 - [ ] the lifetime of each session must be configured in the system

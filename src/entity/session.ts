@@ -22,6 +22,6 @@ export interface CreateSession {
   create(property: SessionProperties): Promise<Session>
 }
 
-export interface DropSession {
-  drop(sessionId: string): Promise<void>
+export interface SessionDrop {
+  drop(sessionId: string, accountId: string): Promise<void>
 }
