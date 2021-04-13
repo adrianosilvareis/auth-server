@@ -18,7 +18,13 @@ describe('DbSessionCheckValidation', () => {
     const promise = sut.check('any_session_id', 'any_agent_user')
     await expect(promise).rejects.toThrowError(expectedThrow)
   })
-  it.todo('should return true if session not found')
+  it('should return true if session not found', async () => {
+    const functionName = 'getById'
+    const { sut, sessionByIdSut } = makeSut()
+    jest.spyOn(sessionByIdSut, functionName).mockReturnValueOnce(Promise.resolve(null))
+    const response = await sut.check('any_session_id', 'any_agent_user')
+    expect(response).toBeTruthy()
+  })
   it.todo('should return true if session is inactive')
   it.todo('should return true if due date is greater than or equal to current date')
   it.todo('should return true if the user agent is not the same as the session agent')

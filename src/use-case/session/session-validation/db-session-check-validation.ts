@@ -4,7 +4,10 @@ export class DbSessionCheckValidation implements SessionCheckValidation {
   constructor (private readonly sessionById: SessionById) {}
 
   async check (sessionId: string, userAgent: string): Promise<boolean> {
-    await this.sessionById.getById(sessionId)
+    const session = await this.sessionById.getById(sessionId)
+    if (!session) {
+      return true
+    }
     return null
   }
 }
