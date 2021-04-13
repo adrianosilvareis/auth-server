@@ -30,7 +30,13 @@ describe('DbSessionById', () => {
     const promise = sut.getById(data)
     await expect(promise).rejects.toThrowError(expectedThrow)
   })
-  it.todo('should return a session on success')
+  it('should return a session on success', async () => {
+    const data = 'any_session_id'
+    const expectedReturn = mockedSession
+    const { sut } = makeSut()
+    const response = await sut.getById(data)
+    expect(response).toEqual(expectedReturn)
+  })
 })
 
 type SutTypes = {

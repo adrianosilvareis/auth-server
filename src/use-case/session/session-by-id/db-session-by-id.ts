@@ -9,6 +9,6 @@ export class DbSessionById implements SessionById {
     if (!session) {
       throw new Error('Session not found')
     }
-    return null
+    return session
   }
 }
