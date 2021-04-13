@@ -29,3 +29,7 @@ export interface SessionDrop {
 export interface SessionLimitCheckByAccount {
   check(accountId: string): Promise<boolean>
 }
+
+export interface SessionCheckValidation {
+  check(sessionId: string, userAgent: string): Promise<boolean>
+}

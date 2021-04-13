@@ -75,6 +75,7 @@ permitted activities:
 ```javascript
 {
   "authentication-id": 1,
+  "username": "Bread",
   "created-at": "2021-01-01 12:00:00Z",
   "due-date": "2021-01-02 12:00:00Z",
   "device": "unknown",
