@@ -8,6 +8,9 @@ export class DbSessionCheckValidation implements SessionCheckValidation {
     if (!session) {
       return true
     }
+    if (!session.active) {
+      return true
+    }
     return null
   }
 }
