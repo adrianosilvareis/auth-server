@@ -25,3 +25,7 @@ export interface CreateSession {
 export interface SessionDrop {
   drop(sessionId: string, accountId: string): Promise<void>
 }
+
+export interface SessionLimitCheckByAccount {
+  check(accountId: string): Promise<boolean>
+}

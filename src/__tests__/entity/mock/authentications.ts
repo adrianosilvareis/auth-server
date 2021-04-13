@@ -1,6 +1,7 @@
 import { Authentication, StatusType } from '@/entity/authentication'
 import faker from 'faker'
 
+const SESSION_LIMIT = 3
 export function mockAuthentication (): Authentication {
   const authGroup = []
   for (let index = 0; index < 3; index++) {
@@ -11,7 +12,7 @@ export function mockAuthentication (): Authentication {
     accountId: faker.datatype.uuid(),
     password: faker.internet.password(8),
     attempts: faker.datatype.number(2),
-    sessionLimit: faker.datatype.number(3),
+    sessionLimit: SESSION_LIMIT,
     status: StatusType.Offline,
     active: true,
     authGroup,
