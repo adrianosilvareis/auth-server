@@ -10,7 +10,14 @@ describe('DbSessionCheckValidation', () => {
     await sut.check('any_session_id', 'any_agent_user')
     expect(spy).toHaveBeenCalledWith(expectedCalled)
   })
-  it.todo('should throw if get session by id throws')
+  it('should throw if get session by id throws', async () => {
+    const functionName = 'getById'
+    const expectedThrow = new Error('any_get_session_by_id_error')
+    const { sut, sessionByIdSut } = makeSut()
+    jest.spyOn(sessionByIdSut, functionName).mockReturnValueOnce(Promise.reject(expectedThrow))
+    const promise = sut.check('any_session_id', 'any_agent_user')
+    await expect(promise).rejects.toThrowError(expectedThrow)
+  })
   it.todo('should return true if session not found')
   it.todo('should return true if session is inactive')
   it.todo('should return true if due date is greater than or equal to current date')
