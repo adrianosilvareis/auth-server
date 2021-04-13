@@ -5,7 +5,10 @@ export class DbSessionById implements SessionById {
   constructor (private readonly sessionById: SessionByIdRepository) {}
 
   async getById (sessionId: string): Promise<Session> {
-    await this.sessionById.getById(sessionId)
+    const session = await this.sessionById.getById(sessionId)
+    if (!session) {
+      throw new Error('Session not found')
+    }
     return null
   }
 }

@@ -1,6 +1,7 @@
 import { Session } from '@/entity/session'
 import { SessionByIdRepository } from '@/use-case/session/protocols/session-by-id-repository'
 import { DbSessionById } from '@/use-case/session/session-by-id/db-session-by-id'
+import { mockReturnSession } from '@/__tests__/entity/mock/sessions'
 
 describe('DbSessionById', () => {
   it('should call get session by id repository', async () => {
@@ -20,7 +21,15 @@ describe('DbSessionById', () => {
     const promise = sut.getById(data)
     await expect(promise).rejects.toThrowError(expectedThrow)
   })
-  it.todo('should throw session not found if session by id return null or empty')
+  it('should throw session not found if session by id return null or empty', async () => {
+    const functionName = 'getById'
+    const data = 'any_session_id'
+    const expectedThrow = new Error('Session not found')
+    const { sut, sessionByIdStub } = makeSut()
+    jest.spyOn(sessionByIdStub, functionName).mockReturnValueOnce(Promise.resolve(null))
+    const promise = sut.getById(data)
+    await expect(promise).rejects.toThrowError(expectedThrow)
+  })
   it.todo('should return a session on success')
 })
 
@@ -39,10 +48,11 @@ function makeSut ():SutTypes {
   }
 }
 
+const mockedSession = mockReturnSession()
 function makeSessionByIdRepositoryStub (): SessionByIdRepository {
   class SessionByIdRepositoryStub implements SessionByIdRepository {
     async getById (sessionId: string): Promise<Session> {
-      return null
+      return mockedSession
     }
   }
   return new SessionByIdRepositoryStub()
