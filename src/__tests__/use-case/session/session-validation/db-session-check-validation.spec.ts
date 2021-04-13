@@ -52,7 +52,7 @@ describe('DbSessionCheckValidation', () => {
   it('should return false if it passes all checks', async () => {
     const { sut } = makeSut()
     const response = await sut.check('any_session_id', mockedSession.userAgent)
-    expect(response).toBeTruthy()
+    expect(response).toBeFalsy()
   })
 })
 

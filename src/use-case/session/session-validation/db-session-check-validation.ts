@@ -18,6 +18,6 @@ export class DbSessionCheckValidation implements SessionCheckValidation {
     if (session.userAgent !== userAgent) {
       return true
     }
-    return true
+    return false
   }
 }
