@@ -1,7 +1,6 @@
-import { Session } from '@/entity/session'
 import { SessionByIdRepository } from '@/use-case/session/protocols/session-by-id-repository'
 import { DbSessionById } from '@/use-case/session/session-by-id/db-session-by-id'
-import { mockReturnSession } from '@/__tests__/entity/mock/sessions'
+import { makeSessionByIdRepositoryStub, mockedSession } from '../stubs/sessions'
 
 describe('DbSessionById', () => {
   it('should call get session by id repository', async () => {
@@ -52,14 +51,4 @@ function makeSut ():SutTypes {
     sut,
     sessionByIdStub
   }
-}
-
-const mockedSession = mockReturnSession()
-function makeSessionByIdRepositoryStub (): SessionByIdRepository {
-  class SessionByIdRepositoryStub implements SessionByIdRepository {
-    async getById (sessionId: string): Promise<Session> {
-      return mockedSession
-    }
-  }
-  return new SessionByIdRepositoryStub()
 }

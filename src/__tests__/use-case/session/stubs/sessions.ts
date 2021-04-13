@@ -1,8 +1,9 @@
 import { Session } from '@/entity/session'
+import { SessionByIdRepository } from '@/use-case/session/protocols/session-by-id-repository'
 import { SessionCountByAuthenticationRepository } from '@/use-case/session/protocols/session-count-by-authentication-repository'
 import { SessionDropRepository } from '@/use-case/session/protocols/session-drop'
 import { SessionListByAuthenticationRepository } from '@/use-case/session/protocols/session-repository'
-import { mockReturnGetSessionListRepository } from '@/__tests__/entity/mock/sessions'
+import { mockReturnGetSessionListRepository, mockReturnSession } from '@/__tests__/entity/mock/sessions'
 
 export const mockedReturnGetSessionListRepository = mockReturnGetSessionListRepository()
 export function makeSessionListByAccountRepositoryStub ():SessionListByAuthenticationRepository {
@@ -30,4 +31,14 @@ export function makeSessionCountByAuthenticationRepository ():SessionCountByAuth
     }
   }
   return new SessionCountByAuthenticationStub()
+}
+
+export const mockedSession = mockReturnSession()
+export function makeSessionByIdRepositoryStub (): SessionByIdRepository {
+  class SessionByIdRepositoryStub implements SessionByIdRepository {
+    async getById (sessionId: string): Promise<Session> {
+      return mockedSession
+    }
+  }
+  return new SessionByIdRepositoryStub()
 }
