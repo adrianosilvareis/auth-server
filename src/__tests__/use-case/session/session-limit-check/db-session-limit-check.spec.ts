@@ -1,7 +1,7 @@
 import { AuthenticationByAccountRepository } from '@/use-case/session/protocols/authentication-repository'
 import { SessionCountByAuthenticationRepository } from '@/use-case/session/protocols/session-count-by-authentication-repository'
 import { DbSessionLimitCheckByAccount } from '@/use-case/session/session-limit/db-session-limit-check'
-import { makeAuthenticationByAccountStub } from '../stubs/authentications'
+import { makeAuthenticationByAccountStub, mockedAuthentication } from '../stubs/authentications'
 import { makeSessionCountByAuthenticationRepository } from '../stubs/sessions'
 
 describe('DbSessionLimitCheckByAccount', () => {
@@ -31,7 +31,14 @@ describe('DbSessionLimitCheckByAccount', () => {
     const promise = sut.check(data)
     await expect(promise).rejects.toThrowError(expectedThrow)
   })
-  it.todo('should call session count with authentication_id')
+  it('should call session count with authentication_id', async () => {
+    const functionName = 'count'
+    const expectedCalled = mockedAuthentication.id
+    const { sut, sessionCountByAuthenticationStub } = makeSut()
+    const spy = jest.spyOn(sessionCountByAuthenticationStub, functionName)
+    await sut.check(expectedCalled)
+    expect(spy).toHaveBeenCalledWith(expectedCalled)
+  })
   it.todo('should throw if session count throws')
   it.todo('should throw if session count greater than limit of account')
 })
