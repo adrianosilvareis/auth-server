@@ -11,7 +11,15 @@ describe('DbSessionById', () => {
     await sut.getById(expectedCalled)
     expect(spy).toHaveBeenCalledWith(expectedCalled)
   })
-  it.todo('should throw if get session by id repository throws')
+  it('should throw if get session by id repository throws', async () => {
+    const functionName = 'getById'
+    const data = 'any_session_id'
+    const expectedThrow = new Error('any_session_id_error')
+    const { sut, sessionByIdStub } = makeSut()
+    jest.spyOn(sessionByIdStub, functionName).mockReturnValueOnce(Promise.reject(expectedThrow))
+    const promise = sut.getById(data)
+    await expect(promise).rejects.toThrowError(expectedThrow)
+  })
   it.todo('should throw session not found if session by id return null or empty')
   it.todo('should return a session on success')
 })
