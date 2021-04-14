@@ -1,4 +1,4 @@
-import { Session } from '@/entity/session'
+import { Session, SessionById } from '@/entity/session'
 import { SessionByIdRepository } from '@/use-case/session/protocols/session-by-id-repository'
 import { SessionCountByAuthenticationRepository } from '@/use-case/session/protocols/session-count-by-authentication-repository'
 import { SessionDropRepository } from '@/use-case/session/protocols/session-drop'
@@ -13,6 +13,15 @@ export function makeSessionListByAccountRepositoryStub ():SessionListByAuthentic
     }
   }
   return new SessionByAccountRepositoryStub()
+}
+
+export function makeSessionByIdStub (): SessionById {
+  class SessionByIdStub implements SessionById {
+    async getById (sessionId: string): Promise<Session> {
+      return mockedSession
+    }
+  }
+  return new SessionByIdStub()
 }
 
 export function makeSessionDropRepositoryStub ():SessionDropRepository {

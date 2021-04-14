@@ -1,23 +1,26 @@
 import { SessionById, SessionCheckValidation } from '@/entity/session'
+import { SessionDropRepository } from '../protocols/session-drop'
 
 export class DbSessionCheckValidation implements SessionCheckValidation {
-  constructor (private readonly sessionById: SessionById) {}
+  constructor (
+    private readonly sessionById: SessionById,
+    private readonly sessionDrop: SessionDropRepository
+  ) {}
 
   async check (sessionId: string, userAgent: string): Promise<boolean> {
     const session = await this.sessionById.getById(sessionId)
-    if (!session) {
-      return true
-    }
-    if (!session.active) {
-      return true
-    }
     const currentDate = new Date()
-    if (session.dueDate <= currentDate) {
-      return true
+    const conditions = {
+      hasNoSession: !session,
+      inactiveSession: !session?.active,
+      expiredSession: session?.dueDate <= currentDate,
+      differentOrigin: session?.userAgent !== userAgent
     }
-    if (session.userAgent !== userAgent) {
-      return true
+    const isInvalid = Object.values(conditions).some(condition => condition)
+
+    if (isInvalid && session?.active) {
+      await this.sessionDrop.drop(session.id)
     }
-    return false
+    return isInvalid
   }
 }
