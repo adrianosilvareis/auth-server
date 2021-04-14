@@ -1,5 +1,5 @@
 import { SessionLimitCheckByAccount } from '@/entity/session'
-import { AuthenticationByAccountRepository } from '../protocols/authentication-repository'
+import { AuthenticationByAccountRepository } from '../protocols/authentication-by-account-repository'
 import { SessionCountByAuthenticationRepository } from '../protocols/session-count-by-authentication-repository'
 
 export class DbSessionLimitCheckByAccount implements SessionLimitCheckByAccount {

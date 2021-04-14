@@ -1,5 +1,5 @@
 import { Session, SessionByAccount } from '@/entity/session'
-import { AuthenticationByAccountRepository } from '../protocols/authentication-repository'
+import { AuthenticationByAccountRepository } from '../protocols/authentication-by-account-repository'
 import { SessionListByAuthenticationRepository } from '../protocols/session-repository'
 
 export class DbSessionByAccount implements SessionByAccount {

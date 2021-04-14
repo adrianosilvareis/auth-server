@@ -1,4 +1,4 @@
-import { AuthenticationByAccountRepository } from '@/use-case/session/protocols/authentication-repository'
+import { AuthenticationByAccountRepository } from '@/use-case/session/protocols/authentication-by-account-repository'
 import { SessionCountByAuthenticationRepository } from '@/use-case/session/protocols/session-count-by-authentication-repository'
 import { DbSessionLimitCheckByAccount } from '@/use-case/session/session-limit/db-session-limit-check'
 import { makeAuthenticationByAccountStub, mockedAuthentication } from '../stubs/authentications'
