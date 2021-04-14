@@ -57,12 +57,10 @@ permitted activities:
 {
   "title": "administrator",
   "activities": [
-    {
-      "account": ["all"],
-      "authentication": ["get", "create", "update"],
-      "session": ["get", "delete"],
-      "any_router": ["any_person_action"]
-    }
+    { name: "account", permissions: ["all"] },
+    { name: "authentication", permissions: ["get", "create", "update"] },
+    { name: "session", permissions: ["get", "delete"] },
+    { name: "any_router", permissions: ["any_person_action"] }
   ]
 }
 ```
