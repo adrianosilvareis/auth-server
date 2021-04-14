@@ -1,5 +1,5 @@
 import { SessionById, SessionCheckValidation } from '@/entity/session'
-import { SessionDropRepository } from '../protocols/session-drop'
+import { SessionDropRepository } from './protocols/session-drop'
 
 export class DbSessionCheckValidation implements SessionCheckValidation {
   constructor (

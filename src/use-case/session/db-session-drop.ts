@@ -1,9 +1,9 @@
 import { AuthenticationStatusEnum } from '@/entity/authentication'
 import { SessionDrop } from '@/entity/session'
-import { AuthenticationByAccountRepository } from '../protocols/authentication-by-account-repository'
-import { AuthenticationUpdateStatusRepository } from '../protocols/authentication-update-status-repository'
-import { SessionCountByAuthenticationRepository } from '../protocols/session-count-by-authentication-repository'
-import { SessionDropRepository } from '../protocols/session-drop'
+import { AuthenticationByAccountRepository } from './protocols/authentication-by-account-repository'
+import { AuthenticationUpdateStatusRepository } from './protocols/authentication-update-status-repository'
+import { SessionCountByAuthenticationRepository } from './protocols/session-count-by-authentication-repository'
+import { SessionDropRepository } from './protocols/session-drop'
 
 const JUST_ONE_SESSION = 1
 export class DbSessionDrop implements SessionDrop {

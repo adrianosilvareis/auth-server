@@ -1,5 +1,5 @@
 import { SessionById, SessionDrop } from '@/entity/session'
-import { DbSessionCheckValidation } from '@/use-case/session/session-validation/db-session-check-validation'
+import { DbSessionCheckValidation } from '@/use-case/session/db-session-check-validation'
 import faker from 'faker'
 import { makeSessionByIdStub, makeSessionDropRepositoryStub, mockedSession } from '../stubs/sessions'
 

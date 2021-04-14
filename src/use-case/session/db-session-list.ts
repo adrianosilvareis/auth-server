@@ -1,5 +1,5 @@
 import { Session, SessionList } from '@/entity/session'
-import { SessionFilters, SessionListRepository } from '../protocols/session-repository'
+import { SessionFilters, SessionListRepository } from './protocols/session-repository'
 
 export class DbSessionList implements SessionList {
   constructor (private readonly sessionRepository: SessionListRepository) {}

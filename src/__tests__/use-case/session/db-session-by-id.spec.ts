@@ -1,5 +1,5 @@
 import { SessionByIdRepository } from '@/use-case/session/protocols/session-by-id-repository'
-import { DbSessionById } from '@/use-case/session/session-by-id/db-session-by-id'
+import { DbSessionById } from '@/use-case/session/db-session-by-id'
 import { makeSessionByIdRepositoryStub, mockedSession } from '../stubs/sessions'
 
 describe('DbSessionById', () => {

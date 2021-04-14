@@ -1,6 +1,6 @@
 import { AuthenticationByAccountRepository } from '@/use-case/session/protocols/authentication-by-account-repository'
 import { SessionListByAuthenticationRepository } from '@/use-case/session/protocols/session-repository'
-import { DbSessionByAccount } from '@/use-case/session/session-by-account/db-session-by-account'
+import { DbSessionByAccount } from '@/use-case/session/db-session-by-account'
 import { makeAuthenticationByAccountStub, mockedAuthentication } from '../stubs/authentications'
 import { makeSessionListByAccountRepositoryStub, mockedReturnGetSessionListRepository } from '../stubs/sessions'
 

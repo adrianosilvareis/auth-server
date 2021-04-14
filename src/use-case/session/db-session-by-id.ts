@@ -1,5 +1,5 @@
 import { Session, SessionById } from '@/entity/session'
-import { SessionByIdRepository } from '../protocols/session-by-id-repository'
+import { SessionByIdRepository } from './protocols/session-by-id-repository'
 
 export class DbSessionById implements SessionById {
   constructor (private readonly sessionById: SessionByIdRepository) {}

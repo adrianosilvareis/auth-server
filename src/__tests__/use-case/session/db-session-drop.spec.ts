@@ -2,7 +2,7 @@ import { AuthenticationByAccount, AuthenticationStatusEnum } from '@/entity/auth
 import { AuthenticationUpdateStatusRepository } from '@/use-case/session/protocols/authentication-update-status-repository'
 import { SessionCountByAuthenticationRepository } from '@/use-case/session/protocols/session-count-by-authentication-repository'
 import { SessionDropRepository } from '@/use-case/session/protocols/session-drop'
-import { DbSessionDrop } from '@/use-case/session/session-drop/db-session-drop'
+import { DbSessionDrop } from '@/use-case/session/db-session-drop'
 import { makeAuthenticationByAccountStub, makeAuthenticationUpdateStatusRepositoryStub, mockedAuthentication } from '../stubs/authentications'
 import { makeSessionCountByAuthenticationRepository, makeSessionDropRepositoryStub } from '../stubs/sessions'
 

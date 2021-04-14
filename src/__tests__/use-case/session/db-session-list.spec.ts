@@ -1,6 +1,6 @@
 import { Session } from '@/entity/session'
 import { SessionListRepository } from '@/use-case/session/protocols/session-repository'
-import { DbSessionList } from '@/use-case/session/session-list/db-session-list'
+import { DbSessionList } from '@/use-case/session/db-session-list'
 import { mockedReturnGetSessionListRepository } from '../stubs/sessions'
 
 describe('DbSessionList', () => {
