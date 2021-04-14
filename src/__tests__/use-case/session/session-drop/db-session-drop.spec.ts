@@ -1,8 +1,10 @@
-import { AuthenticationByAccount } from '@/entity/authentication'
+import { AuthenticationByAccount, AuthenticationStatusEnum } from '@/entity/authentication'
+import { AuthenticationUpdateStatusRepository } from '@/use-case/session/protocols/authentication-update-status-repository'
+import { SessionCountByAuthenticationRepository } from '@/use-case/session/protocols/session-count-by-authentication-repository'
 import { SessionDropRepository } from '@/use-case/session/protocols/session-drop'
 import { DbSessionDrop } from '@/use-case/session/session-drop/db-session-drop'
-import { makeAuthenticationByAccountStub } from '../stubs/authentications'
-import { makeSessionDropRepositoryStub } from '../stubs/sessions'
+import { makeAuthenticationByAccountStub, makeAuthenticationUpdateStatusRepositoryStub, mockedAuthentication } from '../stubs/authentications'
+import { makeSessionCountByAuthenticationRepository, makeSessionDropRepositoryStub } from '../stubs/sessions'
 
 describe('DbSessionDrop', () => {
   it('should call get authentication with account_id', async () => {
@@ -45,6 +47,24 @@ describe('DbSessionDrop', () => {
     const promise = sut.drop('any_session_id', 'any_account_id')
     await expect(promise).rejects.toThrowError(expectedThrow)
   })
+  it('should call SessionCount with authentication_id ', async () => {
+    const functionName = 'count'
+    const expectedCalled = mockedAuthentication.id
+    const { sut, sessionCountByAuthenticationStub } = makeSut()
+    const spy = jest.spyOn(sessionCountByAuthenticationStub, functionName)
+    await sut.drop('any_session_id', 'any_account_id')
+    expect(spy).toHaveBeenCalledWith(expectedCalled)
+  })
+  it('should update authentication status to offline if not has other session opened', async () => {
+    const functionName = 'count'
+    const functionSpyName = 'updateStatus'
+    const returnCountSession = 1
+    const { sut, sessionCountByAuthenticationStub, authenticationUpdateStatus } = makeSut()
+    jest.spyOn(sessionCountByAuthenticationStub, functionName).mockReturnValueOnce(Promise.resolve(returnCountSession))
+    const spy = jest.spyOn(authenticationUpdateStatus, functionSpyName)
+    await sut.drop('any_session_id', 'any_account_id')
+    expect(spy).toHaveBeenCalledWith(mockedAuthentication.id, AuthenticationStatusEnum.Offline)
+  })
   it('should return void on success', async () => {
     const { sut } = makeSut()
     const response = await sut.drop('any_session_id', 'any_account_id')
@@ -55,17 +75,23 @@ describe('DbSessionDrop', () => {
 type SutTypes = {
   sut: DbSessionDrop,
   authenticationByAccountStub: AuthenticationByAccount,
+  sessionCountByAuthenticationStub: SessionCountByAuthenticationRepository,
+  authenticationUpdateStatus: AuthenticationUpdateStatusRepository,
   sessionDropStub: SessionDropRepository
 }
 
 function makeSut (): SutTypes {
   const authenticationByAccountStub = makeAuthenticationByAccountStub()
   const sessionDropStub = makeSessionDropRepositoryStub()
-  const sut = new DbSessionDrop(authenticationByAccountStub, sessionDropStub)
+  const sessionCountByAuthenticationStub = makeSessionCountByAuthenticationRepository()
+  const authenticationUpdateStatus = makeAuthenticationUpdateStatusRepositoryStub()
+  const sut = new DbSessionDrop(authenticationByAccountStub, sessionCountByAuthenticationStub, authenticationUpdateStatus, sessionDropStub)
 
   return {
     sut,
     authenticationByAccountStub,
+    sessionCountByAuthenticationStub,
+    authenticationUpdateStatus,
     sessionDropStub
   }
 }

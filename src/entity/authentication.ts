@@ -1,4 +1,4 @@
-export enum StatusType {
+export enum AuthenticationStatusEnum {
   Online,
   Offline,
   Blocked,
@@ -11,7 +11,7 @@ export interface Authentication {
   password: string
   attempts: number
   sessionLimit: number
-  status: StatusType
+  status: AuthenticationStatusEnum
   active: true
   authGroup: string[]
   createdAt: Date

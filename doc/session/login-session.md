@@ -10,5 +10,5 @@
 - [x] the system administrator will have access to all active sessions
 - [ ] the maximum number of sessions must be configured in the system
 - [ ] the lifetime of each session must be configured in the system
-- [ ] update authentication status to offline if not has other session opened
+- [x] update authentication status to offline if not has other session opened
 - [x] drop session if it is active and any other condition is not valid

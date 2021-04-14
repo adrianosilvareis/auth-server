@@ -1,4 +1,4 @@
-import { Authentication, StatusType } from '@/entity/authentication'
+import { Authentication, AuthenticationStatusEnum } from '@/entity/authentication'
 import faker from 'faker'
 
 const SESSION_LIMIT = 3
@@ -13,7 +13,7 @@ export function mockAuthentication (): Authentication {
     password: faker.internet.password(8),
     attempts: faker.datatype.number(2),
     sessionLimit: SESSION_LIMIT,
-    status: StatusType.Offline,
+    status: AuthenticationStatusEnum.Offline,
     active: true,
     authGroup,
     createdAt: faker.date.past(),
