@@ -1,3 +1,5 @@
+import { uuid } from '@/entity/utils'
+
 export interface SessionDropRepository {
-  drop(sessionId: string): Promise<void>
+  drop(sessionId: uuid): Promise<void>
 }

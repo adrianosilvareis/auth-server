@@ -1,5 +1,6 @@
 import { AuthenticationStatusEnum } from '@/entity/authentication'
 import { SessionDrop } from '@/entity/session'
+import { uuid } from '@/entity/utils'
 import { AuthenticationByAccountRepository } from './protocols/authentication-by-account-repository'
 import { AuthenticationUpdateStatusRepository } from './protocols/authentication-update-status-repository'
 import { SessionCountByAuthenticationRepository } from './protocols/session-count-by-authentication-repository'
@@ -14,7 +15,7 @@ export class DbSessionDrop implements SessionDrop {
     private readonly session: SessionDropRepository
   ) {}
 
-  async drop (sessionId: string, accountId: string): Promise<void> {
+  async drop (sessionId: uuid, accountId: uuid): Promise<void> {
     const authentication = await this.authentication.getByAccountId(accountId)
     if (!authentication) throw new Error('account not found')
     const sessionCount = await this.sessionCount.count(authentication.id)

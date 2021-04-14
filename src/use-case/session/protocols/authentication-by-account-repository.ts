@@ -1,5 +1,6 @@
 import { Authentication } from '@/entity/authentication'
+import { uuid } from '@/entity/utils'
 
 export interface AuthenticationByAccountRepository {
-  getByAccountId(accountId: string): Promise<Authentication>
+  getByAccountId(accountId: uuid): Promise<Authentication>
 }

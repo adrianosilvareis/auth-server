@@ -1,3 +1,5 @@
+import { uuid } from './utils'
+
 export enum AuthenticationStatusEnum {
   Online,
   Offline,
@@ -6,13 +8,13 @@ export enum AuthenticationStatusEnum {
 }
 
 export interface Authentication {
-  id: string
-  accountId: string
+  id: uuid
+  accountId: uuid
   password: string
   attempts: number
   sessionLimit: number
   status: AuthenticationStatusEnum
-  active: true
+  active: boolean
   authGroup: string[]
   createdAt: Date
   updatedAt: Date
@@ -25,11 +27,11 @@ export interface AuthenticationList {
 }
 
 export interface AuthenticationByAccount {
-  getByAccountId (accountId: string): Promise<Authentication>
+  getByAccountId (accountId: uuid): Promise<Authentication>
 }
 
 export interface UpdateAuthentication {
-  updateById(id: string, auth: AuthenticationProperties): Promise<Authentication>
+  updateById(id: uuid, auth: AuthenticationProperties): Promise<Authentication>
 }
 
 export interface CreateAuthentication {
@@ -37,5 +39,5 @@ export interface CreateAuthentication {
 }
 
 export interface CancelAuthentication {
-  cancel(authenticationId: string): Promise<void>
+  cancel(authenticationId: uuid): Promise<void>
 }

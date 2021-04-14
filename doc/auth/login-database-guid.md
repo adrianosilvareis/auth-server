@@ -84,7 +84,7 @@ permitted activities:
 }
 ```
 
-## activity-history
+## activity log
 
 permitted activities:
 `get | create`

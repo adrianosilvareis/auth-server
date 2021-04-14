@@ -1,3 +1,5 @@
+import { uuid } from '@/entity/utils'
+
 export interface SessionCountByAuthenticationRepository {
-  count(authenticationId: string): Promise<number>
+  count(authenticationId: uuid): Promise<number>
 }

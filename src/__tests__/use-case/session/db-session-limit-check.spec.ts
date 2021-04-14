@@ -7,28 +7,28 @@ import { makeSessionCountByAuthenticationRepository } from '../stubs/sessions'
 describe('DbSessionLimitCheckByAccount', () => {
   it('should call get authentication with account_id', async () => {
     const functionName = 'getByAccountId'
-    const expectedCalled = 'any_account_id'
+    const accountId = '1a-1a-1a-1a'
     const { sut, authenticationByAccountStub } = makeSut()
     const spy = jest.spyOn(authenticationByAccountStub, functionName)
-    await sut.check(expectedCalled)
-    expect(spy).toHaveBeenCalledWith(expectedCalled)
+    await sut.check(accountId)
+    expect(spy).toHaveBeenCalledWith(accountId)
   })
   it('should throw if getAuthenticationByAccount throws', async () => {
-    const data = 'any_account_id'
+    const accountId = '1a-1a-1a-1a'
     const functionName = 'getByAccountId'
     const expectedThrow = new Error('any_get_authentication_by_account')
     const { sut, authenticationByAccountStub } = makeSut()
     jest.spyOn(authenticationByAccountStub, functionName).mockReturnValueOnce(Promise.reject(expectedThrow))
-    const promise = sut.check(data)
+    const promise = sut.check(accountId)
     await expect(promise).rejects.toThrowError(expectedThrow)
   })
   it('should throw account not found if getAuthenticationByAccount return null or empty', async () => {
-    const data = 'any_account_id'
+    const accountId = '1a-1a-1a-1a'
     const functionName = 'getByAccountId'
     const expectedThrow = new Error('account not found')
     const { sut, authenticationByAccountStub } = makeSut()
     jest.spyOn(authenticationByAccountStub, functionName).mockReturnValueOnce(Promise.resolve(null))
-    const promise = sut.check(data)
+    const promise = sut.check(accountId)
     await expect(promise).rejects.toThrowError(expectedThrow)
   })
   it('should call session count with authentication_id', async () => {
@@ -40,28 +40,28 @@ describe('DbSessionLimitCheckByAccount', () => {
     expect(spy).toHaveBeenCalledWith(expectedCalled)
   })
   it('should throw if session count throws', async () => {
-    const data = 'any_account_id'
+    const accountId = '1a-1a-1a-1a'
     const functionName = 'count'
     const expectedThrow = new Error('any_session_count_error')
     const { sut, sessionCountByAuthenticationStub } = makeSut()
     jest.spyOn(sessionCountByAuthenticationStub, functionName).mockReturnValueOnce(Promise.reject(expectedThrow))
-    const promise = sut.check(data)
+    const promise = sut.check(accountId)
     await expect(promise).rejects.toThrowError(expectedThrow)
   })
   it('should return truthy if session count greater than limit of account', async () => {
-    const data = 'any_account_id'
+    const accountId = '1a-1a-1a-1a'
     const functionName = 'count'
     const { sut, sessionCountByAuthenticationStub } = makeSut()
     jest.spyOn(sessionCountByAuthenticationStub, functionName).mockReturnValueOnce(Promise.resolve(mockedAuthentication.sessionLimit + 1))
-    const response = await sut.check(data)
+    const response = await sut.check(accountId)
     expect(response).toBeTruthy()
   })
   it('should return falsy if session count less than or equal to', async () => {
-    const data = 'any_account_id'
+    const accountId = '1a-1a-1a-1a'
     const functionName = 'count'
     const { sut, sessionCountByAuthenticationStub } = makeSut()
     jest.spyOn(sessionCountByAuthenticationStub, functionName).mockReturnValueOnce(Promise.resolve(mockedAuthentication.sessionLimit))
-    const response = await sut.check(data)
+    const response = await sut.check(accountId)
     expect(response).toBeFalsy()
   })
 })

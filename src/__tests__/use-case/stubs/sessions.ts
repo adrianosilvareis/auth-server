@@ -1,4 +1,5 @@
 import { Session, SessionById } from '@/entity/session'
+import { uuid } from '@/entity/utils'
 import { SessionByIdRepository } from '@/use-case/session/protocols/session-by-id-repository'
 import { SessionCountByAuthenticationRepository } from '@/use-case/session/protocols/session-count-by-authentication-repository'
 import { SessionDropRepository } from '@/use-case/session/protocols/session-drop'
@@ -8,7 +9,7 @@ import { mockReturnGetSessionListRepository, mockReturnSession } from '@/__tests
 export const mockedReturnGetSessionListRepository = mockReturnGetSessionListRepository()
 export function makeSessionListByAccountRepositoryStub ():SessionListByAuthenticationRepository {
   class SessionByAccountRepositoryStub implements SessionListByAuthenticationRepository {
-    async getSessionsByAuthenticationId (accountId: string): Promise<Session[]> {
+    async getSessionsByAuthenticationId (accountId: uuid): Promise<Session[]> {
       return mockedReturnGetSessionListRepository
     }
   }
@@ -17,7 +18,7 @@ export function makeSessionListByAccountRepositoryStub ():SessionListByAuthentic
 
 export function makeSessionByIdStub (): SessionById {
   class SessionByIdStub implements SessionById {
-    async getById (sessionId: string): Promise<Session> {
+    async getById (sessionId: uuid): Promise<Session> {
       return mockedSession
     }
   }
@@ -26,7 +27,7 @@ export function makeSessionByIdStub (): SessionById {
 
 export function makeSessionDropRepositoryStub ():SessionDropRepository {
   class SessionDropRepositoryStub implements SessionDropRepository {
-    async drop (sessionId: string): Promise<void> {
+    async drop (sessionId: uuid): Promise<void> {
       return null
     }
   }
@@ -35,7 +36,7 @@ export function makeSessionDropRepositoryStub ():SessionDropRepository {
 
 export function makeSessionCountByAuthenticationRepository ():SessionCountByAuthenticationRepository {
   class SessionCountByAuthenticationStub implements SessionCountByAuthenticationRepository {
-    async count (authenticationId: string): Promise<number> {
+    async count (authenticationId: uuid): Promise<number> {
       return 0
     }
   }
@@ -45,7 +46,7 @@ export function makeSessionCountByAuthenticationRepository ():SessionCountByAuth
 export const mockedSession = mockReturnSession()
 export function makeSessionByIdRepositoryStub (): SessionByIdRepository {
   class SessionByIdRepositoryStub implements SessionByIdRepository {
-    async getById (sessionId: string): Promise<Session> {
+    async getById (sessionId: uuid): Promise<Session> {
       return mockedSession
     }
   }

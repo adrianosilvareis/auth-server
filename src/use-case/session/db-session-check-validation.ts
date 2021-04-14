@@ -1,4 +1,5 @@
 import { SessionById, SessionCheckValidation } from '@/entity/session'
+import { uuid } from '@/entity/utils'
 import { SessionDropRepository } from './protocols/session-drop'
 
 export class DbSessionCheckValidation implements SessionCheckValidation {
@@ -7,7 +8,7 @@ export class DbSessionCheckValidation implements SessionCheckValidation {
     private readonly sessionDrop: SessionDropRepository
   ) {}
 
-  async check (sessionId: string, userAgent: string): Promise<boolean> {
+  async check (sessionId: uuid, userAgent: string): Promise<boolean> {
     const session = await this.sessionById.getById(sessionId)
     const currentDate = new Date()
     const conditions = {

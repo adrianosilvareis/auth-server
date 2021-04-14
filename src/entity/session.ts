@@ -1,7 +1,9 @@
+import { ip, uuid } from './utils'
+
 export interface Session {
-  id: string
-  authenticationId: string
-  ip: string
+  id: uuid
+  authenticationId: uuid
+  ip: ip
   userAgent: string
   createdAt: Date
   dueDate: Date
@@ -15,11 +17,11 @@ export interface SessionList {
 }
 
 export interface SessionByAccount {
-  getByAccountId(accountId: string): Promise<Session[]>
+  getByAccountId(accountId: uuid): Promise<Session[]>
 }
 
 export interface SessionById {
-  getById(sessionId: string): Promise<Session>
+  getById(sessionId: uuid): Promise<Session>
 }
 
 export interface CreateSession {
@@ -27,13 +29,13 @@ export interface CreateSession {
 }
 
 export interface SessionDrop {
-  drop(sessionId: string, accountId: string): Promise<void>
+  drop(sessionId: uuid, accountId: uuid): Promise<void>
 }
 
 export interface SessionLimitCheckByAccount {
-  check(accountId: string): Promise<boolean>
+  check(accountId: uuid): Promise<boolean>
 }
 
 export interface SessionCheckValidation {
-  check(sessionId: string, userAgent: string): Promise<boolean>
+  check(sessionId: uuid, userAgent: string): Promise<boolean>
 }
