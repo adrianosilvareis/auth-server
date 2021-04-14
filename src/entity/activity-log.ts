@@ -1,9 +1,10 @@
+import { Activity } from './auth-group'
 import { ip, uuid } from './utils'
 
 export interface ActivityLog {
   id: uuid,
   sessionId: uuid
-  activity: string
+  activity: Activity
   createdAt: Date
   username: string,
   ip: ip
