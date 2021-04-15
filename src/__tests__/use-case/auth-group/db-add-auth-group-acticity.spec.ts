@@ -41,7 +41,15 @@ describe('DbAddAuthGroupActivity', () => {
     await sut.addActivity(authGroupId, mockedAuthGroupActivity)
     expect(spy).toHaveBeenCalledWith(authGroupId, authGroupToUpdate)
   })
-  it.todo('should throw if updateAuthGroupRepository throws')
+  it('should throw if updateAuthGroupRepository throws', async () => {
+    const { sut, updateAuthGroupStub } = makeSut()
+    const functionName = 'update'
+    const expectedThrow = new Error('any_update_auth_group_error')
+    const authGroupId = 'a1-a1-a1-a1'
+    jest.spyOn(updateAuthGroupStub, functionName).mockReturnValueOnce(Promise.reject(expectedThrow))
+    const promise = sut.addActivity(authGroupId, null)
+    await expect(promise).rejects.toThrowError(expectedThrow)
+  })
   // it('should return a list of authGroup', async () => {
   //   const { sut } = makeSut()
   //   const authGroupId = 'a1-a1-a1-a1'
