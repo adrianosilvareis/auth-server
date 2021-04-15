@@ -3,6 +3,13 @@ import { CreateAuthGroupRepository } from '@/use-case/auth-group/protocols/creat
 import { mockAuthGroup, mockAuthGroupProperties } from '@/__tests__/entity/mock/auth-group'
 
 export const mockedAuthGroup = mockAuthGroup()
+export const mockedAuthGroupList = [
+  mockAuthGroup(),
+  mockAuthGroup(),
+  mockAuthGroup(),
+  mockAuthGroup(),
+  mockAuthGroup()
+]
 export const mockedAuthGroupProperties = mockAuthGroupProperties()
 
 export function makeCreateAuthGroupRepositoryStub (): CreateAuthGroupRepository {

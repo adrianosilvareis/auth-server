@@ -1,6 +1,7 @@
 import { AuthGroup } from '@/entity/auth-group'
 import { DbListAuthGroup } from '@/use-case/auth-group/db-list-auth-group'
 import { ListAuthGroupRepository } from '@/use-case/auth-group/protocols/list-auth-group-repository'
+import { mockedAuthGroupList } from '../stubs/auth-group'
 
 describe('DbListAuthGroup', () => {
   it('should call ListAuthGroupRepository', async () => {
@@ -18,7 +19,12 @@ describe('DbListAuthGroup', () => {
     const promise = sut.list()
     await expect(promise).rejects.toThrowError(expectedThrow)
   })
-  it.todo('should return a list of authGroup')
+  it('should return a list of authGroup', async () => {
+    const { sut } = makeSut()
+    const expectedReturn = mockedAuthGroupList
+    const response = await sut.list()
+    expect(response).toEqual(expectedReturn)
+  })
 })
 
 type SutTypes = {
@@ -39,7 +45,7 @@ function makeSut (): SutTypes {
 function makeListAuthGroupStub (): ListAuthGroupRepository {
   class ListAuthGroupRepositoryStub implements ListAuthGroupRepository {
     async list (): Promise<AuthGroup[]> {
-      return []
+      return mockedAuthGroupList
     }
   }
   return new ListAuthGroupRepositoryStub()
