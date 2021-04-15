@@ -1,7 +1,8 @@
 import { AuthGroupProperties, AuthGroup } from '@/entity/auth-group'
 import { uuid } from '@/entity/utils'
 import { CreateAuthGroupRepository } from '@/use-case/auth-group/protocols/create-auth-group-repository'
-import { GetAuthGroupRepository, ListAuthGroupRepository } from '@/use-case/auth-group/protocols/get-auth-group-repository'
+import { GetAuthGroupRepository } from '@/use-case/auth-group/protocols/get-auth-group-repository'
+import { ListAuthGroupRepository } from '@/use-case/auth-group/protocols/list-auth-group-repository'
 import { UpdateAuthGroupRepository } from '@/use-case/auth-group/protocols/update-auth-group-repository'
 import { mockAuthGroup, mockAuthGroupProperties } from '@/__tests__/entity/mock/auth-group'
 
@@ -27,7 +28,7 @@ export function makeCreateAuthGroupRepositoryStub (): CreateAuthGroupRepository 
 export function makeListAuthGroupStub (): ListAuthGroupRepository {
   class ListAuthGroupRepositoryStub implements ListAuthGroupRepository {
     async list (): Promise<AuthGroup[]> {
-      return mockedAuthGroupList
+      return [...mockedAuthGroupList]
     }
   }
   return new ListAuthGroupRepositoryStub()
@@ -36,7 +37,7 @@ export function makeListAuthGroupStub (): ListAuthGroupRepository {
 export function makeGetAuthGroupStub (): GetAuthGroupRepository {
   class GetAuthGroupRepositoryStub implements GetAuthGroupRepository {
     async get (authGroupId: uuid): Promise<AuthGroup> {
-      return mockedAuthGroup
+      return Object.assign({}, mockedAuthGroup)
     }
   }
   return new GetAuthGroupRepositoryStub()

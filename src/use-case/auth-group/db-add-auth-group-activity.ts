@@ -1,4 +1,4 @@
-import { Activity, AddAuthGroupActivity } from '@/entity/auth-group'
+import { Activity, AddAuthGroupActivity, AuthGroup } from '@/entity/auth-group'
 import { uuid } from '@/entity/utils'
 import { GetAuthGroupRepository } from './protocols/get-auth-group-repository'
 import { UpdateAuthGroupRepository } from './protocols/update-auth-group-repository'

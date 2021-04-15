@@ -6,5 +6,5 @@
 - [x] list auth groups
 - [x] list permissions to auth group
 - [x] add permissions to auth group
-- [ ] remove permissions to auth group
+- [x] remove permissions to auth group
 - [ ] remove auth-group if any user use
