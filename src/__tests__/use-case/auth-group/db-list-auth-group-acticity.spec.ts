@@ -1,4 +1,4 @@
-import { DbListAuthGroupActivity } from '@/use-case/auth-group/db-create-auth-group-activity'
+import { DbListAuthGroupActivity } from '@/use-case/auth-group/db-list-auth-group-activity'
 import { GetAuthGroupRepository } from '@/use-case/auth-group/protocols/get-auth-group-repository'
 import { mockedAuthGroup, makeGetAuthGroupStub } from '../stubs/auth-group'
 
