@@ -13,6 +13,7 @@ export interface AuthGroup {
 }
 
 export type AuthGroupProperties = Omit<AuthGroup, 'id'>
+export type AuthGroupUpdates = Partial<AuthGroup>
 
 export interface CreateAuthGroup {
   create(authGroup: AuthGroupProperties): Promise<AuthGroup>
@@ -24,6 +25,10 @@ export interface ListAuthGroup {
 
 export interface ListAuthGroupActivity {
   list(authGroupId: uuid): Promise<Activity[]>
+}
+
+export interface AddAuthGroupActivity {
+  addActivity(authGroupId: uuid, activity: Activity): Promise<Activity[]>
 }
 
 // get | update | create | delete

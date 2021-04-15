@@ -2,7 +2,7 @@ import { DbListAuthGroupActivity } from '@/use-case/auth-group/db-create-auth-gr
 import { GetAuthGroupRepository } from '@/use-case/auth-group/protocols/get-auth-group-repository'
 import { mockedAuthGroup, makeGetAuthGroupStub } from '../stubs/auth-group'
 
-describe('DbCreateAuthGroupActivity', () => {
+describe('DbListAuthGroupActivity', () => {
   it('should call GetAuthGroupRepository', async () => {
     const { sut, getAuthGroupStub } = makeSut()
     const functionName = 'get'
