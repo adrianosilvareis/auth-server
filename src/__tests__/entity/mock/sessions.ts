@@ -1,11 +1,12 @@
 import { Session } from '@/entity/session'
+import { ip, uuid } from '@/entity/utils'
 import faker from 'faker'
 
 export function mockReturnSession (): Session {
   return {
-    id: faker.datatype.uuid(),
-    ip: faker.internet.ip(),
-    authenticationId: faker.datatype.uuid(),
+    id: <uuid>faker.datatype.uuid(),
+    ip: <ip>faker.internet.ip(),
+    authenticationId: <uuid>faker.datatype.uuid(),
     createdAt: faker.date.recent(),
     active: true,
     userAgent: faker.internet.userAgent(),
