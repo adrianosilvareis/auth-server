@@ -18,4 +18,8 @@ export interface CreateAuthGroup {
   create(authGroup: AuthGroupProperties): Promise<AuthGroup>
 }
 
+export interface ListAuthGroup {
+  list(): Promise<AuthGroup[]>
+}
+
 // get | update | create | delete
