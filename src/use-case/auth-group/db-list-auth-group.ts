@@ -5,6 +5,7 @@ export class DbListAuthGroup implements ListAuthGroup {
   constructor (private readonly listAuthGroupStub: ListAuthGroupRepository) {}
 
   async list (): Promise<AuthGroup[]> {
+    await this.listAuthGroupStub.list()
     return null
   }
 }
