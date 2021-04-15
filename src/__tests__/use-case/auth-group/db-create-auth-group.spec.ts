@@ -1,7 +1,7 @@
 import { AuthGroupProperties, AuthGroup } from '@/entity/auth-group'
 import { uuid } from '@/entity/utils'
 import { DbCreateAuthGroup } from '@/use-case/auth-group/db-create-auth-group'
-import { CreateAuthGroupRepository } from '@/use-case/auth-group/protocols/create-auth-grup-repository'
+import { CreateAuthGroupRepository } from '@/use-case/auth-group/protocols/create-auth-group-repository'
 import faker from 'faker'
 
 describe('DbCreateAuthGroup', () => {
@@ -20,7 +20,11 @@ describe('DbCreateAuthGroup', () => {
     const promise = sut.create(mockedAuthGroupProperties)
     expect(promise).rejects.toThrowError(expectedThrow)
   })
-  it.todo('should return a AuthGroupModel on success')
+  it('should return a AuthGroupModel on success', async () => {
+    const { sut } = makeSut()
+    const response = await sut.create(mockedAuthGroupProperties)
+    expect(response).toEqual(mockedAuthGroup)
+  })
 })
 
 type SutTypes = {
