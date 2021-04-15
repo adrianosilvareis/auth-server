@@ -1,6 +1,6 @@
 import { AuthGroupProperties, AuthGroup } from '@/entity/auth-group'
 import { CreateAuthGroupRepository } from '@/use-case/auth-group/protocols/create-auth-group-repository'
-import { GetAuthGroupRepository, ListAuthGroupRepository } from '@/use-case/auth-group/protocols/list-auth-group-repository'
+import { GetAuthGroupRepository, ListAuthGroupRepository } from '@/use-case/auth-group/protocols/get-auth-group-repository'
 import { mockAuthGroup, mockAuthGroupProperties } from '@/__tests__/entity/mock/auth-group'
 
 export const mockedAuthGroup = mockAuthGroup()

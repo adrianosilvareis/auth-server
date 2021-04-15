@@ -1,5 +1,5 @@
-import { DbCreateAuthGroupActivity } from '@/use-case/auth-group/db-create-auth-group-activity'
-import { GetAuthGroupRepository } from '@/use-case/auth-group/protocols/list-auth-group-repository'
+import { DbListAuthGroupActivity } from '@/use-case/auth-group/db-create-auth-group-activity'
+import { GetAuthGroupRepository } from '@/use-case/auth-group/protocols/get-auth-group-repository'
 import { mockedAuthGroup, makeGetAuthGroupStub } from '../stubs/auth-group'
 
 describe('DbCreateAuthGroupActivity', () => {
@@ -39,13 +39,13 @@ describe('DbCreateAuthGroupActivity', () => {
 })
 
 type SutTypes = {
-  sut: DbCreateAuthGroupActivity,
+  sut: DbListAuthGroupActivity,
   getAuthGroupStub: GetAuthGroupRepository,
 }
 
 function makeSut (): SutTypes {
   const getAuthGroupStub = makeGetAuthGroupStub()
-  const sut = new DbCreateAuthGroupActivity(getAuthGroupStub)
+  const sut = new DbListAuthGroupActivity(getAuthGroupStub)
 
   return {
     sut,

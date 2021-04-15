@@ -1,8 +1,8 @@
 import { Activity, ListAuthGroupActivity } from '@/entity/auth-group'
 import { uuid } from '@/entity/utils'
-import { GetAuthGroupRepository } from './protocols/list-auth-group-repository'
+import { GetAuthGroupRepository } from './protocols/get-auth-group-repository'
 
-export class DbCreateAuthGroupActivity implements ListAuthGroupActivity {
+export class DbListAuthGroupActivity implements ListAuthGroupActivity {
   constructor (private readonly authGroupRepo: GetAuthGroupRepository) {}
 
   async list (authGroupId: uuid): Promise<Activity[]> {
