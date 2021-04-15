@@ -13,15 +13,15 @@ permitted activities:
 
 ```javascript
 {
-  "name": "Leanne Graham",
-  "username": "Bret",
-  "email": "Sincere@april.biz",
-  "phone": "1-770-736-8031 x56442",
+  "name": "Leanne Graham", // confidential data
+  "username": "Bret",  // confidential data
+  "email": "Sincere@april.biz",  // confidential data
+  "phone": "1-770-736-8031 x56442",  // confidential data
   "address": {
-    "street": "Kulas Light",
-    "suite": "Apt. 556",
-    "city": "Gwenborough",
-    "zipcode": "92998-3874"
+    "street": "Kulas Light",  // confidential data
+    "suite": "Apt. 556",  // confidential data
+    "city": "Gwenborough",  // confidential data
+    "zipcode": "92998-3874"  // confidential data
   },
   "created-at": "2013-01-01 12:00:00Z",
   "active": true, // only approved status
@@ -37,7 +37,7 @@ permitted activities:
 ```javascript
 {
   "account_id": "account_id",
-  "password": "hashpassword",
+  "password": "hashpassword",  // confidential data
   "attempts": 0,
   "session_limit": 3,
   "status": "offline", //"online" | "offline" | "blocked" | "created"
@@ -57,12 +57,10 @@ permitted activities:
 {
   "title": "administrator",
   "activities": [
-    {
-      "account": ["all"],
-      "authentication": ["get", "create", "update"],
-      "session": ["get", "delete"],
-      "any_router": ["any_person_action"]
-    }
+    { name: "account", permissions: ["all"] },
+    { name: "authentication", permissions: ["get", "create", "update"] },
+    { name: "session", permissions: ["get", "delete"] },
+    { name: "any_router", permissions: ["any_person_action"] }
   ]
 }
 ```
@@ -75,6 +73,7 @@ permitted activities:
 ```javascript
 {
   "authentication-id": 1,
+  "username": "Bread",  // confidential data
   "created-at": "2021-01-01 12:00:00Z",
   "due-date": "2021-01-02 12:00:00Z",
   "device": "unknown",
@@ -83,7 +82,7 @@ permitted activities:
 }
 ```
 
-## activity-history
+## activity log
 
 permitted activities:
 `get | create`
