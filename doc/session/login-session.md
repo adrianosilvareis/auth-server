@@ -8,7 +8,5 @@
 - [x] check if the session provided in the JWT is active
 - [x] a session will not be validated from a user agent other than the one logged in
 - [x] the system administrator will have access to all active sessions
-- [ ] the maximum number of sessions must be configured in the system
-- [ ] the lifetime of each session must be configured in the system
 - [x] update authentication status to offline if not has other session opened
 - [x] drop session if it is active and any other condition is not valid
