@@ -50,13 +50,13 @@ describe('DbAddAuthGroupActivity', () => {
     const promise = sut.addActivity(authGroupId, null)
     await expect(promise).rejects.toThrowError(expectedThrow)
   })
-  // it('should return a list of authGroup', async () => {
-  //   const { sut } = makeSut()
-  //   const authGroupId = 'a1-a1-a1-a1'
-  //   const expectedReturn = mockedAuthGroup.activities
-  //   const response = await sut.addActivity(authGroupId)
-  //   expect(response).toEqual(expectedReturn)
-  // })
+  it('should return a authGroup on success', async () => {
+    const { sut } = makeSut()
+    const authGroupId = 'a1-a1-a1-a1'
+    const { mockedAuthGroupActivity, authGroupToUpdate } = mockUpdatedAuthGroup()
+    const response = await sut.addActivity(authGroupId, mockedAuthGroupActivity)
+    expect(response).toEqual(authGroupToUpdate)
+  })
 })
 
 type SutTypes = {

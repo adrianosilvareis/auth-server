@@ -28,7 +28,7 @@ export interface ListAuthGroupActivity {
 }
 
 export interface AddAuthGroupActivity {
-  addActivity(authGroupId: uuid, activity: Activity): Promise<Activity[]>
+  addActivity(authGroupId: uuid, activity: Activity): Promise<AuthGroup>
 }
 
 // get | update | create | delete

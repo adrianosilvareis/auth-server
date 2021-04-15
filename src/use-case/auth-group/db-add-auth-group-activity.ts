@@ -9,7 +9,7 @@ export class DbAddAuthGroupActivity implements AddAuthGroupActivity {
     private readonly updateAuthGroupRepo: UpdateAuthGroupRepository
   ) {}
 
-  async addActivity (authGroupId: uuid, activity: Activity): Promise<Activity[]> {
+  async addActivity (authGroupId: uuid, activity: Activity): Promise<AuthGroup> {
     const authGroup = await this.getAuthGroupRepo.get(authGroupId)
     if (!authGroup) {
       throw new Error(`auth group not found for id: ${authGroupId}`)
@@ -17,7 +17,7 @@ export class DbAddAuthGroupActivity implements AddAuthGroupActivity {
 
     authGroup.activities.push(activity)
 
-    await this.updateAuthGroupRepo.update(authGroupId, authGroup)
-    return null
+    const authGroupUpdated = await this.updateAuthGroupRepo.update(authGroupId, authGroup)
+    return authGroupUpdated
   }
 }
