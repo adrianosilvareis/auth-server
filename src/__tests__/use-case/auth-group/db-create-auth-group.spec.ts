@@ -12,7 +12,14 @@ describe('DbCreateAuthGroup', () => {
     await sut.create(mockedAuthGroupProperties)
     expect(spy).toHaveBeenCalledWith(mockedAuthGroupProperties)
   })
-  it.todo('should throw if CreateAuthGroupRepository throws')
+  it('should throw if CreateAuthGroupRepository throws', async () => {
+    const { sut, createAuthGroupStub } = makeSut()
+    const functionName = 'create'
+    const expectedThrow = new Error('any_create_auth_error')
+    jest.spyOn(createAuthGroupStub, functionName).mockReturnValueOnce(Promise.reject(expectedThrow))
+    const promise = sut.create(mockedAuthGroupProperties)
+    expect(promise).rejects.toThrowError(expectedThrow)
+  })
   it.todo('should return a AuthGroupModel on success')
 })
 
