@@ -1,5 +1,6 @@
 import { AuthGroupProperties, AuthGroup } from '@/entity/auth-group'
 import { CreateAuthGroupRepository } from '@/use-case/auth-group/protocols/create-auth-group-repository'
+import { ListAuthGroupRepository } from '@/use-case/auth-group/protocols/list-auth-group-repository'
 import { mockAuthGroup, mockAuthGroupProperties } from '@/__tests__/entity/mock/auth-group'
 
 export const mockedAuthGroup = mockAuthGroup()
@@ -19,4 +20,13 @@ export function makeCreateAuthGroupRepositoryStub (): CreateAuthGroupRepository 
     }
   }
   return new CreateAuthGroupRepositoryStub()
+}
+
+export function makeListAuthGroupStub (): ListAuthGroupRepository {
+  class ListAuthGroupRepositoryStub implements ListAuthGroupRepository {
+    async list (): Promise<AuthGroup[]> {
+      return mockedAuthGroupList
+    }
+  }
+  return new ListAuthGroupRepositoryStub()
 }

@@ -1,7 +1,6 @@
-import { AuthGroup } from '@/entity/auth-group'
 import { DbListAuthGroup } from '@/use-case/auth-group/db-list-auth-group'
 import { ListAuthGroupRepository } from '@/use-case/auth-group/protocols/list-auth-group-repository'
-import { mockedAuthGroupList } from '../stubs/auth-group'
+import { makeListAuthGroupStub, mockedAuthGroupList } from '../stubs/auth-group'
 
 describe('DbListAuthGroup', () => {
   it('should call ListAuthGroupRepository', async () => {
@@ -40,13 +39,4 @@ function makeSut (): SutTypes {
     sut,
     listAuthGroupStub
   }
-}
-
-function makeListAuthGroupStub (): ListAuthGroupRepository {
-  class ListAuthGroupRepositoryStub implements ListAuthGroupRepository {
-    async list (): Promise<AuthGroup[]> {
-      return mockedAuthGroupList
-    }
-  }
-  return new ListAuthGroupRepositoryStub()
 }
