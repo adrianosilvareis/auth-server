@@ -1,9 +1,9 @@
-import { AuthGroup, AuthGroupProperties } from '@/entity/auth-group'
+import { Activity, AuthGroup, AuthGroupProperties } from '@/entity/auth-group'
 import { uuid } from '@/entity/utils'
 import faker from 'faker'
 
-export function mockAuthGroup (): AuthGroup {
-  const activity = {
+export function mockAuthGroupActivity (): Activity {
+  return {
     name: faker.name.title(),
     permissions: [
       faker.lorem.word(5),
@@ -11,10 +11,17 @@ export function mockAuthGroup (): AuthGroup {
       faker.lorem.word(5)
     ]
   }
+}
+export function mockAuthGroup (): AuthGroup {
   return {
     id: <uuid>faker.datatype.uuid(),
     title: faker.name.title(),
-    activities: [activity]
+    activities: [
+      mockAuthGroupActivity(),
+      mockAuthGroupActivity(),
+      mockAuthGroupActivity(),
+      mockAuthGroupActivity()
+    ]
   }
 }
 
