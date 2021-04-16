@@ -26,6 +26,8 @@ export interface AccountModel {
 }
 
 // get | update | create | cancel
+export type AccountModelProperties = Omit<AccountModel, 'id'>
+export type AccountModelUpdates = Partial<AccountModel>
 
 export interface ListAccountByAuthGroup {
   listAccountByAuthGroupId(authGroupId: uuid): Promise<AccountModel[]>
@@ -41,4 +43,8 @@ export interface GetAccountById {
 
 export interface CancelAccountById {
   cancel(accountId: uuid): Promise<AccountModel>
+}
+
+export interface UpdateAccountById {
+  update(accountId: uuid, data: AccountModelUpdates): Promise<AccountModel>
 }

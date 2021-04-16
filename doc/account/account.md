@@ -5,6 +5,7 @@
 - [x] list all accounts for the administrator
 - [x] list accounts by auth-group
 - [x] get account by id
-- [ ] update account
+- [x] update account
 - [x] cancel account
 - [ ] encrypt sensitive account data before save
+- [ ] decrypt sensitive account data before show
