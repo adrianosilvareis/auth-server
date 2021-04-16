@@ -15,6 +15,10 @@ export interface CreateActivityLog {
   logActivity(activity: ActivityLogProperties): Promise<ActivityLog>
 }
 
+export interface ListActivityLog {
+  listAll(accountId: uuid): Promise<ActivityLog[]>
+}
+
 export interface ListActivityLogByAccount {
   listByAccountId(accountId: uuid): Promise<ActivityLog[]>
 }

@@ -1,6 +1,6 @@
 import { ActivityLog, ActivityLogById } from '@/entity/activity-log'
 import { uuid } from '@/entity/utils'
-import { GetActivityLogByIdRepository } from './protocols/list-activity-log-by-account-repository'
+import { GetActivityLogByIdRepository } from './protocols/get-activity-log-by-id-repository'
 
 export class DbGetActivityLogById implements ActivityLogById {
   constructor (private readonly activityLogRepo: GetActivityLogByIdRepository) {}

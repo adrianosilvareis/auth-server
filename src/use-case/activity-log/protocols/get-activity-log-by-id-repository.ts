@@ -1,6 +1,6 @@
 import { ActivityLog } from '@/entity/activity-log'
 import { uuid } from '@/entity/utils'
 
-export interface ListActivityLogByAccountRepository {
-  listByAccountId(accountId: uuid): Promise<ActivityLog[]>
+export interface GetActivityLogByIdRepository {
+  getById(activityId: uuid): Promise<ActivityLog>
 }
