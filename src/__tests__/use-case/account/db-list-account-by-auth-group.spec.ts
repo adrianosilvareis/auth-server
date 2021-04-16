@@ -12,7 +12,15 @@ describe('DbListAccountByAuthGroup', () => {
     await sut.listAccountByAuthGroupId(authGroupId)
     expect(spy).toHaveBeenCalledWith(authGroupId)
   })
-  it.todo('should throw if AccountsByGroupRepository throws')
+  it('should throw if AccountsByGroupRepository throws', async () => {
+    const { sut, listAccountsByGroup } = makeSut()
+    const functionName = 'getAccountByGroup'
+    const authGroupId = 'a1-a1-a1-a1'
+    const expectedThrow = new Error('any_accountByGroupError')
+    jest.spyOn(listAccountsByGroup, functionName).mockReturnValueOnce(Promise.reject(expectedThrow))
+    const promise = sut.listAccountByAuthGroupId(authGroupId)
+    expect(promise).rejects.toThrowError(expectedThrow)
+  })
   it.todo('should return accounts on success')
 })
 
