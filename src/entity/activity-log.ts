@@ -14,3 +14,7 @@ export type ActivityLogProperties = Omit<ActivityLog, 'id'>
 export interface CreateActivityLog {
   logActivity(activity: ActivityLogProperties): Promise<ActivityLog>
 }
+
+export interface ListActivityLogByAccount {
+  listByAccountId(accountId: uuid): Promise<ActivityLog[]>
+}

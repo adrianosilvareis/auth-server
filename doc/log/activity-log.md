@@ -4,4 +4,5 @@
 
 - [ ] record all accesses for an observed route
 - [ ] access record must be a decorator
-- [ ] list accesses for the account owner and system administrator
+- [x] list accesses for the account owner
+- [ ] list accesses for the system administrator
