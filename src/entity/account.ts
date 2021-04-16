@@ -30,3 +30,7 @@ export interface AccountModel {
 export interface ListAccountByAuthGroup {
   listAccountByAuthGroupId(authGroupId: uuid): Promise<AccountModel[]>
 }
+
+export interface GetAccountById {
+  getById(accountId: uuid): Promise<AccountModel>
+}
