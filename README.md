@@ -10,6 +10,7 @@
 | [session](doc/log/activity-log.md)              | 8/8      | 100%    |
 | [login-fail](doc/auth/login-fail-flow.md)       | 0/10     | 0%      |
 | [login-success](doc/auth/login-success-flow.md) | 0/4      | 0%      |
+| TOTAL                                           | 22/40    | 55%     |
 
 ## GUID
 
