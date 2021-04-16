@@ -1,7 +1,8 @@
 import { ActivityLogProperties, ActivityLog } from '@/entity/activity-log'
 import { uuid } from '@/entity/utils'
 import { CreateActivityLogRepository } from '@/use-case/activity-log/protocols/create-activity-log-repository'
-import { ListActivityLogByAccountRepository } from '@/use-case/activity-log/protocols/list-activity-log-by-account-repository'
+import { ListActivityLogByAccountRepository } from '@/use-case/activity-log/protocols/get-activity-log-by-id-repository'
+import { GetActivityLogByIdRepository } from '@/use-case/activity-log/protocols/list-activity-log-by-account-repository'
 import { mockedActivityLog, mockedActivityLogList } from '@/__tests__/entity/mock/activity-log'
 
 export function makeCreateActivityLogRepositoryStub (): CreateActivityLogRepository {
@@ -20,4 +21,13 @@ export function makeListActivityLogByAccountRepositoryStub (): ListActivityLogBy
     }
   }
   return new ListActivityLogByAccountRepositoryStub()
+}
+
+export function makeGetActivityLogByIdRepositoryStub (): GetActivityLogByIdRepository {
+  class GetActivityLogByIdRepositoryStub implements GetActivityLogByIdRepository {
+    async getById (activityId: uuid): Promise<ActivityLog> {
+      return mockedActivityLog
+    }
+  }
+  return new GetActivityLogByIdRepositoryStub()
 }
