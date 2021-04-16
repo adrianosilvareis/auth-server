@@ -1,8 +1,7 @@
-import { ActivityLog } from '@/entity/activity-log'
-import { uuid } from '@/entity/utils'
 import { DbListActivityLogByAccount } from '@/use-case/activity-log/db-list-activity-log-by-account'
 import { ListActivityLogByAccountRepository } from '@/use-case/activity-log/protocols/list-activity-log-by-account-repository'
 import { mockedActivityLogList } from '@/__tests__/entity/mock/activity-log'
+import { makeListActivityLogByAccountRepositoryStub } from '../stubs/activity-log'
 
 describe('DbListActivityLogByAccount', () => {
   it('should call listActivityLogByAccountRepository with correct values', async () => {
@@ -44,13 +43,4 @@ function makeSut (): SutTypes {
     sut,
     listActivityLogByAccountStub
   }
-}
-
-function makeListActivityLogByAccountRepositoryStub (): ListActivityLogByAccountRepository {
-  class ListActivityLogByAccountRepositoryStub implements ListActivityLogByAccountRepository {
-    async listByAccountId (accountId: uuid): Promise<ActivityLog[]> {
-      return mockedActivityLogList
-    }
-  }
-  return new ListActivityLogByAccountRepositoryStub()
 }
