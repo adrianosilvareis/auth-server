@@ -17,7 +17,7 @@ export interface Account {
   username: string // confidential data
   email: string // confidential data
   phone: string // confidential data
-  address: Address // confidential data,
+  address?: Address // confidential data,
   createdAt: Date
   active: boolean // only approved status
   status: AccountStatusEnum

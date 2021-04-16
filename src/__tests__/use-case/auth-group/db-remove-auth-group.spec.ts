@@ -1,6 +1,9 @@
 import { uuid } from '@/entity/utils'
+import { Account } from '@/entity/account'
 import { AccountsByGroupRepository } from '@/use-case/account/protocols/account-by-auth-group-repository'
 import { DbRemoveAuthGroup } from '@/use-case/auth-group/db-remove-auth-group'
+import { mockAccount } from '@/__tests__/entity/mock/account'
+import { RemoveAuthGroupRepository } from '@/use-case/auth-group/protocols/remove-auth-group-repository'
 
 describe('DbRemoveAuthGroup', () => {
   it('should call accountByGroupRepository with authGroupId', async () => {
@@ -20,32 +23,60 @@ describe('DbRemoveAuthGroup', () => {
     const promise = sut.remove(authGroupId)
     await expect(promise).rejects.toThrowError(expectedThrow)
   })
-  it.todo('should throw if accountByGroupRepository return any account')
-  it.todo('should call removeAuthGroupRepository')
+  it('should throw if accountByGroupRepository return any account', async () => {
+    const { sut, accountByGroupRepositoryStub } = makeSut()
+    const functionName = 'getAccountByGroup'
+    const authGroupId = 'a1-a1-a1-a1'
+    const expectedThrow = new Error('auth group in use')
+    jest.spyOn(accountByGroupRepositoryStub, functionName).mockReturnValueOnce(Promise.resolve([mockedAccount]))
+    const promise = sut.remove(authGroupId)
+    await expect(promise).rejects.toThrowError(expectedThrow)
+  })
+  it('should call removeAuthGroupRepository', async () => {
+    const { sut, removeAuthGroupRepositoryStub } = makeSut()
+    const functionName = 'remove'
+    const authGroupId = 'a1-a1-a1-a1'
+    const spy = jest.spyOn(removeAuthGroupRepositoryStub, functionName)
+    await sut.remove(authGroupId)
+    expect(spy).toHaveBeenCalledWith(authGroupId)
+  })
   it.todo('should throw if removeAuthGroupRepository throw')
   it.todo('should return AuthGroup deleted on success')
 })
 
 type SutTypes = {
   sut: DbRemoveAuthGroup,
-  accountByGroupRepositoryStub: AccountsByGroupRepository
+  accountByGroupRepositoryStub: AccountsByGroupRepository,
+  removeAuthGroupRepositoryStub: RemoveAuthGroupRepository
 }
 
 function makeSut (): SutTypes {
   const accountByGroupRepositoryStub = makeAccountByGroupRepositoryStub()
-  const sut = new DbRemoveAuthGroup(accountByGroupRepositoryStub)
+  const removeAuthGroupRepositoryStub = makeRemoveAuthGroupRepositoryStub()
+  const sut = new DbRemoveAuthGroup(accountByGroupRepositoryStub, removeAuthGroupRepositoryStub)
 
   return {
     sut,
-    accountByGroupRepositoryStub
+    accountByGroupRepositoryStub,
+    removeAuthGroupRepositoryStub
   }
 }
 
+const mockedAccount = mockAccount()
 function makeAccountByGroupRepositoryStub (): AccountsByGroupRepository {
   class AccountByGroupRepositoryStub implements AccountsByGroupRepository {
     async getAccountByGroup (authGroupId: uuid):Promise<Account[]> {
-      return null
+      return []
     }
   }
   return new AccountByGroupRepositoryStub()
+}
+
+function makeRemoveAuthGroupRepositoryStub (): RemoveAuthGroupRepository {
+  class RemoveAuthGroupRepositoryStub implements RemoveAuthGroupRepository {
+    async remove (authGroupId: uuid): Promise<AuthGroup> {
+      return null
+    }
+  }
+  return new RemoveAuthGroupRepositoryStub()
 }
