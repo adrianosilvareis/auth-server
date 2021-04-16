@@ -6,7 +6,7 @@ export class DbListAccountByAuthGroup implements ListAccountByAuthGroup {
   constructor (private readonly accountRepo: AccountsByGroupRepository) {}
 
   async listAccountByAuthGroupId (authGroupId: uuid): Promise<AccountModel[]> {
-    await this.accountRepo.getAccountByGroup(authGroupId)
-    return null
+    const list = await this.accountRepo.getAccountByGroup(authGroupId)
+    return list
   }
 }
