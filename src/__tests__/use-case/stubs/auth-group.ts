@@ -3,6 +3,7 @@ import { uuid } from '@/entity/utils'
 import { CreateAuthGroupRepository } from '@/use-case/auth-group/protocols/create-auth-group-repository'
 import { GetAuthGroupRepository } from '@/use-case/auth-group/protocols/get-auth-group-repository'
 import { ListAuthGroupRepository } from '@/use-case/auth-group/protocols/list-auth-group-repository'
+import { RemoveAuthGroupRepository } from '@/use-case/auth-group/protocols/remove-auth-group-repository'
 import { UpdateAuthGroupRepository } from '@/use-case/auth-group/protocols/update-auth-group-repository'
 import { mockAuthGroup, mockAuthGroupProperties } from '@/__tests__/entity/mock/auth-group'
 
@@ -50,4 +51,13 @@ export function makeUpdateAuthGroupStub (): UpdateAuthGroupRepository {
     }
   }
   return new UpdateAuthGroupRepositoryStub()
+}
+
+export function makeRemoveAuthGroupRepositoryStub (): RemoveAuthGroupRepository {
+  class RemoveAuthGroupRepositoryStub implements RemoveAuthGroupRepository {
+    async remove (authGroupId: uuid): Promise<AuthGroup> {
+      return mockedAuthGroup
+    }
+  }
+  return new RemoveAuthGroupRepositoryStub()
 }

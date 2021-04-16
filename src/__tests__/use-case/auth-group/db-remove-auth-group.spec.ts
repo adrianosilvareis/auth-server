@@ -4,7 +4,8 @@ import { AccountsByGroupRepository } from '@/use-case/account/protocols/account-
 import { DbRemoveAuthGroup } from '@/use-case/auth-group/db-remove-auth-group'
 import { mockAccount } from '@/__tests__/entity/mock/account'
 import { RemoveAuthGroupRepository } from '@/use-case/auth-group/protocols/remove-auth-group-repository'
-import { mockedAuthGroup } from '../stubs/auth-group'
+import { makeRemoveAuthGroupRepositoryStub, mockedAuthGroup } from '../stubs/auth-group'
+import { makeAccountByGroupRepositoryStub, mockedAccount } from '../stubs/account'
 
 describe('DbRemoveAuthGroup', () => {
   it('should call accountByGroupRepository with authGroupId', async () => {
@@ -30,6 +31,7 @@ describe('DbRemoveAuthGroup', () => {
     const authGroupId = 'a1-a1-a1-a1'
     const expectedThrow = new Error('auth group in use')
     jest.spyOn(accountByGroupRepositoryStub, functionName).mockReturnValueOnce(Promise.resolve([mockedAccount]))
+
     const promise = sut.remove(authGroupId)
     await expect(promise).rejects.toThrowError(expectedThrow)
   })
@@ -74,23 +76,4 @@ function makeSut (): SutTypes {
     accountByGroupRepositoryStub,
     removeAuthGroupRepositoryStub
   }
-}
-
-const mockedAccount = mockAccount()
-function makeAccountByGroupRepositoryStub (): AccountsByGroupRepository {
-  class AccountByGroupRepositoryStub implements AccountsByGroupRepository {
-    async getAccountByGroup (authGroupId: uuid):Promise<Account[]> {
-      return []
-    }
-  }
-  return new AccountByGroupRepositoryStub()
-}
-
-function makeRemoveAuthGroupRepositoryStub (): RemoveAuthGroupRepository {
-  class RemoveAuthGroupRepositoryStub implements RemoveAuthGroupRepository {
-    async remove (authGroupId: uuid): Promise<AuthGroup> {
-      return mockedAuthGroup
-    }
-  }
-  return new RemoveAuthGroupRepositoryStub()
 }
