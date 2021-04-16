@@ -4,6 +4,7 @@ import { AccountsByGroupRepository } from '@/use-case/account/protocols/account-
 import { mockAccount } from '@/__tests__/entity/mock/account'
 import { GetAccountByIdRepository } from '@/use-case/account/protocols/account-by-id-repository'
 import { ListAllAccountRepository } from '@/use-case/account/protocols/list-all-account'
+import { CancelAccountByIdRepository } from '@/use-case/account/protocols/cancel-account-by-id-repository'
 
 export const mockedAccountList = [
   mockAccount(),
@@ -29,6 +30,15 @@ export function makeGetAccountByIdRepositoryStub (): GetAccountByIdRepository {
     }
   }
   return new GetAccountByIdStub()
+}
+
+export function makeCancelAccountByIdRepositoryStub (): CancelAccountByIdRepository {
+  class CancelAccountByIdStub implements CancelAccountByIdRepository {
+    async cancel (accountId: uuid): Promise<AccountModel> {
+      return mockedAccount
+    }
+  }
+  return new CancelAccountByIdStub()
 }
 
 export function makeAccountsByGroupRepositoryStub (): AccountsByGroupRepository {

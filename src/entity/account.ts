@@ -38,3 +38,7 @@ export interface ListAllAccount {
 export interface GetAccountById {
   getById(accountId: uuid): Promise<AccountModel>
 }
+
+export interface CancelAccountById {
+  cancel(accountId: uuid): Promise<AccountModel>
+}

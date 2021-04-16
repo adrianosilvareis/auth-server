@@ -6,5 +6,5 @@
 - [x] list accounts by auth-group
 - [x] get account by id
 - [ ] update account
-- [ ] cancel account
+- [x] cancel account
 - [ ] encrypt sensitive account data before save
