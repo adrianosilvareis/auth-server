@@ -1,7 +1,7 @@
-import { Account, AccountStatusEnum } from '@/entity/account'
+import { AccountModel, AccountStatusEnum } from '@/entity/account'
 import faker from 'faker'
 
-export function mockAccount (): Account {
+export function mockAccount (): AccountModel {
   return {
     name: faker.name.firstName(),
     active: true,
