@@ -6,7 +6,7 @@ export class DbListActivityLogByAccount implements ListActivityLogByAccount {
   constructor (private readonly activityLogRepo: ListActivityLogByAccountRepository) {}
 
   async listByAccountId (accountId: uuid): Promise<ActivityLog[]> {
-    await this.activityLogRepo.listByAccountId(accountId)
-    return null
+    const activityLogList = await this.activityLogRepo.listByAccountId(accountId)
+    return activityLogList
   }
 }

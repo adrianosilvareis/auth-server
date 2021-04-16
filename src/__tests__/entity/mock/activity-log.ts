@@ -3,6 +3,13 @@ import { uuid, ip } from '@/entity/utils'
 import faker from 'faker'
 
 export const mockedActivityLog = mockActivityLog()
+export const mockedActivityLogList = [
+  mockActivityLog(),
+  mockActivityLog(),
+  mockActivityLog(),
+  mockActivityLog()
+]
+
 export function mockActivityLog (): ActivityLog {
   const activity = {
     name: faker.lorem.word(10),
