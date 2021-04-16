@@ -11,7 +11,15 @@ describe('DbRemoveAuthGroup', () => {
     await sut.remove(authGroupId)
     expect(spy).toHaveBeenCalledWith(authGroupId)
   })
-  it.todo('should throw if accountByGroupRepository throws')
+  it('should throw if accountByGroupRepository throws', async () => {
+    const { sut, accountByGroupRepositoryStub } = makeSut()
+    const functionName = 'getAccountByGroup'
+    const authGroupId = 'a1-a1-a1-a1'
+    const expectedThrow = new Error('any_accounts_by_auth_group_error')
+    jest.spyOn(accountByGroupRepositoryStub, functionName).mockReturnValueOnce(Promise.reject(expectedThrow))
+    const promise = sut.remove(authGroupId)
+    await expect(promise).rejects.toThrowError(expectedThrow)
+  })
   it.todo('should throw if accountByGroupRepository return any account')
   it.todo('should call removeAuthGroupRepository')
   it.todo('should throw if removeAuthGroupRepository throw')
