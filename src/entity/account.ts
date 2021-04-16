@@ -1,3 +1,5 @@
+import { uuid } from './utils'
+
 export enum AccountStatusEnum {
   WAITING_FOR_APPROVAL,
   APPROVED,
@@ -12,7 +14,7 @@ export interface Address {
   zipCode: string // confidential data
 }
 
-export interface Account {
+export interface AccountModel {
   name: string // confidential data
   username: string // confidential data
   email: string // confidential data
@@ -21,4 +23,14 @@ export interface Account {
   createdAt: Date
   active: boolean // only approved status
   status: AccountStatusEnum
+}
+
+// get | update | create | cancel
+
+export interface ListAccountByAuthGroup {
+  listAccountByAuthGroupId(authGroupId: uuid): Promise<AccountModel[]>
+}
+
+export interface GetAccountById {
+  getById(accountId: uuid): Promise<AccountModel>
 }

@@ -1,8 +1,5 @@
-import { uuid } from '@/entity/utils'
-import { Account } from '@/entity/account'
 import { AccountsByGroupRepository } from '@/use-case/account/protocols/account-by-auth-group-repository'
 import { DbRemoveAuthGroup } from '@/use-case/auth-group/db-remove-auth-group'
-import { mockAccount } from '@/__tests__/entity/mock/account'
 import { RemoveAuthGroupRepository } from '@/use-case/auth-group/protocols/remove-auth-group-repository'
 import { makeRemoveAuthGroupRepositoryStub, mockedAuthGroup } from '../stubs/auth-group'
 import { makeAccountByGroupRepositoryStub, mockedAccount } from '../stubs/account'
