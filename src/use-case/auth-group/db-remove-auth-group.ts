@@ -14,7 +14,7 @@ export class DbRemoveAuthGroup implements RemoveAuthGroup {
     if (accounts.length) {
       throw new Error('auth group in use')
     }
-    await this.authGroupRepo.remove(authGroupId)
-    return null
+    const response = await this.authGroupRepo.remove(authGroupId)
+    return response
   }
 }

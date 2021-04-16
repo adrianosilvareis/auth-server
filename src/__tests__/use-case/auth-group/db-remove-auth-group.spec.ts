@@ -4,6 +4,7 @@ import { AccountsByGroupRepository } from '@/use-case/account/protocols/account-
 import { DbRemoveAuthGroup } from '@/use-case/auth-group/db-remove-auth-group'
 import { mockAccount } from '@/__tests__/entity/mock/account'
 import { RemoveAuthGroupRepository } from '@/use-case/auth-group/protocols/remove-auth-group-repository'
+import { mockedAuthGroup } from '../stubs/auth-group'
 
 describe('DbRemoveAuthGroup', () => {
   it('should call accountByGroupRepository with authGroupId', async () => {
@@ -49,7 +50,12 @@ describe('DbRemoveAuthGroup', () => {
     const promise = sut.remove(authGroupId)
     await expect(promise).rejects.toThrowError(expectedThrow)
   })
-  it.todo('should return AuthGroup deleted on success')
+  it('should return AuthGroup deleted on success', async () => {
+    const { sut } = makeSut()
+    const authGroupId = 'a1-a1-a1-a1'
+    const response = await sut.remove(authGroupId)
+    expect(response).toEqual(mockedAuthGroup)
+  })
 })
 
 type SutTypes = {
@@ -83,7 +89,7 @@ function makeAccountByGroupRepositoryStub (): AccountsByGroupRepository {
 function makeRemoveAuthGroupRepositoryStub (): RemoveAuthGroupRepository {
   class RemoveAuthGroupRepositoryStub implements RemoveAuthGroupRepository {
     async remove (authGroupId: uuid): Promise<AuthGroup> {
-      return null
+      return mockedAuthGroup
     }
   }
   return new RemoveAuthGroupRepositoryStub()
