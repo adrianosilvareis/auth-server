@@ -1,7 +1,7 @@
 {
   "name": "auth",
   "version": "1.0.0",
-  "description": "clear",
+  "description": "Clean Architecture project",
   "main": "index.js",
   "scripts": {
     "test": "jest --passWithNoTests --noStackTrace --runInBand --detectOpenHandles",
