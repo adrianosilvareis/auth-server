@@ -35,4 +35,6 @@ export interface RemoveAuthGroupActivity {
   removeActivity(authGroupId: uuid, activity: Activity): Promise<AuthGroup>
 }
 
-// get | update | create | delete
+export interface RemoveAuthGroup {
+  remove(authGroupId: uuid): Promise<AuthGroup>
+}
