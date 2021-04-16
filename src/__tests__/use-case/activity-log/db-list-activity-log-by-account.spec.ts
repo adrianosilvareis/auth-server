@@ -11,7 +11,15 @@ describe('DbListActivityLogByAccount', () => {
     await sut.listByAccountId(accountId)
     expect(spy).toHaveBeenCalledWith(accountId)
   })
-  it.todo('should throw if listActivityLogByAccountRepository throw')
+  it('should throw if listActivityLogByAccountRepository throw', async () => {
+    const { sut, listActivityLogByAccountStub } = makeSut()
+    const functionName = 'listByAccountId'
+    const accountId = 'a1-a1-a1-a1'
+    const expectedThrow = new Error('any-list-activity-repo-error')
+    jest.spyOn(listActivityLogByAccountStub, functionName).mockReturnValueOnce(Promise.reject(expectedThrow))
+    const promise = sut.listByAccountId(accountId)
+    expect(promise).rejects.toThrowError(expectedThrow)
+  })
   it.todo('should return a list of activity logs for account')
 })
 
